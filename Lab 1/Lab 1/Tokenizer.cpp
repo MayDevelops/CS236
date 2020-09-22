@@ -9,7 +9,7 @@ Tokenizer::Tokenizer(string inFile, ofstream &outFile){
 }
 
 Tokenizer::~Tokenizer(){
-    for(int i = 0; i < tokens.size(); i++) {
+    for(size_t i = 0; i < tokens.size(); i++) {
         delete tokens[i];
     }
 }

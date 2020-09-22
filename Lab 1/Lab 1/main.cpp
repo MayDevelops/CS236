@@ -17,7 +17,7 @@ int main(int argc, const char * argv[]) {
     vector <string> outNinetyFiles = {"out1.txt", "out2.txt", "out3.txt"};
     vector <string> outHunnitFiles {"out1.txt", "out2.txt"};
     
-    for (int i = 0; i < hunnitFiles.size(); i++){
+    for (size_t i = 0; i < hunnitFiles.size(); i++){
         ofstream outFile (outHunnitFiles[i]);
         Lexer lexer(hunnitFiles[i], outFile);
         cout << endl << endl << endl;

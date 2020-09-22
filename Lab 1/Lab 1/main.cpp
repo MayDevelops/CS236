@@ -10,7 +10,7 @@ using namespace std;
 
 int main(int argc, const char * argv[]) {
     
-    //Vectors are storing the files for testing and development purposes.
+    //Vectors are storing the files for testing and development purposes, not needed for passoff.
     vector <string> seventyFiles = {"input1.txt", "inputnoway.txt", "input3.txt", "input4.txt", "input5.txt", "input6.txt", "input7.txt"};
     vector <string> ninetyFiles = {"input1.txt", "input2.txt", "input3.txt"};
     vector <string> hundredFiles {"input1.txt", "input2.txt"};

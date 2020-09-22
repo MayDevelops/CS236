@@ -28,9 +28,9 @@ int main(int argc, const char * argv[]) {
  
 
     
-    for (int i = 0; i < hunnitFiles.size(); i++){
-        ofstream outFile (outHunnitFiles[i]);
-    Lexer lexer(hunnitFiles[i], outFile);
+    for (int i = 0; i < seventyFiles.size(); i++){
+        ofstream outFile (outSeventyFiles[i]);
+    Lexer lexer(seventyFiles[i], outFile);
         cout << endl << endl << endl;
 
     }

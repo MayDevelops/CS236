@@ -34,7 +34,10 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
                 }
                 break;
             }
-            
+            if(tempLineNumber > 0) {
+                lineNumber = lineNumber + tempLineNumber;
+                tempLineNumber = 0;
+            }
             inChar = file.get();
             if (inChar == '\n'){
                 lineNumber++;

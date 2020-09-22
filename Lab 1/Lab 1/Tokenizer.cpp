@@ -47,7 +47,6 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
                 tokens.push_back(new Token(16,word,lineNumber, outFile));
                 enterSwitch = false;
             }
-            
             if(enterSwitch) {
                 switch (inChar) {
                     case ',' : {
@@ -107,10 +106,8 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
                                 } else if (inChar == '\n') {
                                     tempLineNumber++;
                                     word += inChar;
-                                    undefined = false;
                                 } else {
                                     word += inChar;
-                                    undefined = false;
                                 }
                             }
                             if(undefined){
@@ -155,8 +152,8 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
                             tokens.push_back(new Token(14,word,lineNumber, outFile));
                         }
                     }
-                } //end of case
-            }//end of bool to enter switch
+                }
+            }
             
             if (isalpha(inChar)){
                 while(isalnum(inChar)){
@@ -182,7 +179,7 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
         cout << "unable to open file." << endl;
     }
     
-    cout << "Total Tokens = " << tokens.size();
+    cout << "Total Tokens = " << tokens.size() << endl;
     outFile << "Total Tokens = " << tokens.size();
     
 }

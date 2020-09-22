@@ -34,7 +34,6 @@
 		CC91676425107A59005D800D /* Lexer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lexer.h; sourceTree = "<group>"; };
 		CC91676625107A73005D800D /* Tokenizer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tokenizer.cpp; sourceTree = "<group>"; };
 		CC91676725107A73005D800D /* Tokenizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tokenizer.h; sourceTree = "<group>"; };
-		CCA358452511D42800582DEC /* File */ = {isa = PBXFileReference; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +73,6 @@
 				CC91676725107A73005D800D /* Tokenizer.h */,
 				CC91676025107A35005D800D /* Token.cpp */,
 				CC91676125107A35005D800D /* Token.h */,
-				CCA358452511D42800582DEC /* File */,
 			);
 			path = "Lab 1";
 			sourceTree = "<group>";

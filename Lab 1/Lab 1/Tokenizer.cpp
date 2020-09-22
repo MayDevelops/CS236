@@ -7,17 +7,20 @@ Tokenizer::Tokenizer(){
 Tokenizer::Tokenizer(string inFile, ofstream &outFile){
     ParseFileInput(inFile, outFile);
 }
+
+Tokenizer::~Tokenizer(){
+    for(int i = 0; i < tokens.size(); i++) {
+        delete tokens[i];
+    }
+}
+
 void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
-    
-    
     ifstream file;
     file.open(inFile);
     char inChar = '\a';
     int lineNumber = 1;
     string word = "";
-    int specialLineNumber = 0;
-    
-    
+    int tempLineNumber = 0;
     
     if (file.is_open()) {
         while (true) {
@@ -25,8 +28,8 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
             word = "";
             if (file.peek() == ifstream::traits_type::eof() ) {
                 if(file.peek() == -1) {
-                    lineNumber = lineNumber + specialLineNumber;
-                    specialLineNumber = 0;
+                    lineNumber = lineNumber + tempLineNumber;
+                    tempLineNumber = 0;
                     tokens.push_back(new Token(17,"",lineNumber, outFile));
                 }
                 break;
@@ -35,8 +38,8 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
             inChar = file.get();
             if (inChar == '\n'){
                 lineNumber++;
-                lineNumber = lineNumber + specialLineNumber;
-                specialLineNumber = 0;
+                lineNumber = lineNumber + tempLineNumber;
+                tempLineNumber = 0;
             }
             
             if(!isalpha(inChar) && CheckCharApproval(inChar)){
@@ -86,36 +89,33 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
                         break;
                     }
                     case '#' : { //FIXME:: still need to implement the block comment rules here
+                        bool undefined = true;
                         if(file.peek() == '|') {
                             word += inChar;
                             inChar = file.get();
                             word += inChar;
                             
-                            
-                            
-                            
-                            
-                            
-                            
-                            
                             while(file.get(inChar)) {
-                                cout << word << endl;
-                                cout << "in char: " << inChar << endl;
                                 if (inChar == '|' && file.peek() == '#'){
                                     //this is the end of th eblock
                                     word += inChar;
                                     inChar = file.get();
                                     word += inChar;
                                     tokens.push_back(new Token(15,word,lineNumber, outFile));
+                                    undefined = false;
                                     break;
                                 } else if (inChar == '\n') {
-                                    specialLineNumber++;
+                                    tempLineNumber++;
                                     word += inChar;
+                                    undefined = false;
                                 } else {
                                     word += inChar;
+                                    undefined = false;
                                 }
                             }
-                            tokens.push_back(new Token(16,word,lineNumber, outFile));
+                            if(undefined){
+                                tokens.push_back(new Token(16,word,lineNumber, outFile));
+                            }
                             break;
                         } else {
                             while(inChar != '\n') {
@@ -144,7 +144,7 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
                                 break;
                             } else if (inChar == '\n') {
                                 word += inChar;
-                                specialLineNumber++;
+                                tempLineNumber++;
                                 continue;
                             }
                             word += inChar;
@@ -158,14 +158,12 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
                 } //end of case
             }//end of bool to enter switch
             
-            
             if (isalpha(inChar)){
                 while(isalnum(inChar)){
                     word += inChar;
                     inChar = file.get();
                 }
                 file.putback(inChar);
-                
                 
                 if(word == "Schemes") {
                     tokens.push_back(new Token(9,"Schemes",lineNumber, outFile));
@@ -178,17 +176,7 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
                 } else {//this is ID
                     tokens.push_back(new Token(13,word,lineNumber, outFile));
                 }
-                
-                
-                
-                
             }
-            
-            
-            
-            
-            
-            
         }
     } else {
         cout << "unable to open file." << endl;
@@ -197,13 +185,7 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
     cout << "Total Tokens = " << tokens.size();
     outFile << "Total Tokens = " << tokens.size();
     
-    
-    
-    
-    
 }
-
-
 
 string Tokenizer::PrintChars(vector <char> chars){
     string temp(chars.begin(), chars.end());
@@ -218,20 +200,3 @@ bool Tokenizer::CheckCharApproval(char inChar){
     }
 }
 
-
-
-/*(
- 
- 
- 
- we only build the word when we need to...essentially
- 
- 
- 
- while loop that gets it while its a numbner or a letter
- once it finds !number or letter it exits the loop b/c it's built the wrod
- then its gonna put back the non letter/number onto the ifstream
- 
- then it enters the switch
- and then it will assign one of the tokens, or its an id
- */

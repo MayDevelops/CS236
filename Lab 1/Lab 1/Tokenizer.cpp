@@ -103,7 +103,7 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
                                     word += inChar;
                                     inChar = file.get();
                                     word += inChar;
-                                    tokens.push_back(new Token(15,word,lineNumber, outFile));
+                                    //tokens.push_back(new Token(15,word,lineNumber, outFile));
                                     undefined = false;
                                     break;
                                 } else if (inChar == '\n') {
@@ -123,7 +123,7 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
                                 inChar = file.get();
                             }
                             file.putback(inChar);
-                            tokens.push_back(new Token(15,word,lineNumber, outFile));
+                            //tokens.push_back(new Token(15,word,lineNumber, outFile));
                             break;
                         }
                     }
@@ -183,7 +183,7 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
     }
     
     cout << "Total Tokens = " << tokens.size() << endl;
-    outFile << "Total Tokens = " << tokens.size();
+    //outFile << "Total Tokens = " << tokens.size();
     
 }
 
@@ -200,3 +200,9 @@ bool Tokenizer::CheckCharApproval(char inChar){
     }
 }
 
+vector <Token*> Tokenizer::GetTokens(){
+    //cout << "Size in Tokenizer: " << tokens.size() << endl;
+    
+    
+    return tokens;
+}

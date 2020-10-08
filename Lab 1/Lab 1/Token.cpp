@@ -12,7 +12,7 @@ Token::Token(int tokenID, string value, int line, ofstream &outFile){
 
 void Token::Print(ofstream &outFile) {
     cout << "(" << enumString << ",\"" << stringValue << "\"," << lineNumber << ")" << endl;
-    outFile << "(" << enumString << ",\"" << stringValue << "\"," << lineNumber << ")" << endl;
+    //outFile << "(" << enumString << ",\"" << stringValue << "\"," << lineNumber << ")" << endl;
     
 }
 
@@ -91,4 +91,20 @@ void Token::EnumToString(int enumValue) {
             break;
         }
     }
+}
+
+string Token::GetID() {
+    return enumString;
+}
+
+string Token::GetValue() {
+    return stringValue;
+}
+
+int Token::GetLine() {
+    return lineNumber;
+}
+
+void Token::Get() {
+    cout << endl << lineNumber << " " << enumString << " \"" << stringValue << "\"" << endl << endl;
 }

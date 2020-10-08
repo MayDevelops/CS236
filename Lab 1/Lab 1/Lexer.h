@@ -15,9 +15,10 @@ class Lexer {
 public:
     
     Lexer(string inFile, ofstream &outFile);
+    vector <Token> GetTokens();
     
 private:
-    vector <Token*> tokens;
+    vector <Token> tokens;
 };
 
 #endif

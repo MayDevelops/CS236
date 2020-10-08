@@ -11,6 +11,7 @@
 		CC91676225107A35005D800D /* Token.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC91676025107A35005D800D /* Token.cpp */; };
 		CC91676525107A59005D800D /* Lexer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC91676325107A59005D800D /* Lexer.cpp */; };
 		CC91676825107A73005D800D /* Tokenizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC91676625107A73005D800D /* Tokenizer.cpp */; };
+		CCEC640F252C4147006064DC /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCEC640D252C4147006064DC /* Parser.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,8 @@
 		CC91676425107A59005D800D /* Lexer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lexer.h; sourceTree = "<group>"; };
 		CC91676625107A73005D800D /* Tokenizer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tokenizer.cpp; sourceTree = "<group>"; };
 		CC91676725107A73005D800D /* Tokenizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tokenizer.h; sourceTree = "<group>"; };
+		CCEC640D252C4147006064DC /* Parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
+		CCEC640E252C4147006064DC /* Parser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,12 +70,14 @@
 			isa = PBXGroup;
 			children = (
 				CC916759251078EF005D800D /* main.cpp */,
-				CC91676325107A59005D800D /* Lexer.cpp */,
 				CC91676425107A59005D800D /* Lexer.h */,
-				CC91676625107A73005D800D /* Tokenizer.cpp */,
+				CC91676325107A59005D800D /* Lexer.cpp */,
 				CC91676725107A73005D800D /* Tokenizer.h */,
-				CC91676025107A35005D800D /* Token.cpp */,
+				CC91676625107A73005D800D /* Tokenizer.cpp */,
+				CCEC640E252C4147006064DC /* Parser.h */,
+				CCEC640D252C4147006064DC /* Parser.cpp */,
 				CC91676125107A35005D800D /* Token.h */,
+				CC91676025107A35005D800D /* Token.cpp */,
 			);
 			path = "Lab 1";
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 				CC91676525107A59005D800D /* Lexer.cpp in Sources */,
 				CC91676825107A73005D800D /* Tokenizer.cpp in Sources */,
 				CC91675A251078EF005D800D /* main.cpp in Sources */,
+				CCEC640F252C4147006064DC /* Parser.cpp in Sources */,
 				CC91676225107A35005D800D /* Token.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

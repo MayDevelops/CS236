@@ -19,6 +19,10 @@ public:
     void Print(ofstream &outFile);
     void EnumToString(int enumValue);
     
+    string GetID();
+    string GetValue();
+    int GetLine();
+    void Get();
 private:
     
     string stringValue = "";

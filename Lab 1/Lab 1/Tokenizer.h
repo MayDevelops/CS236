@@ -21,6 +21,7 @@ public:
     void ParseFileInput(string inFile, ofstream &outFile);
     string PrintChars(vector <char> chars);
     bool CheckCharApproval(char c);
+    vector <Token*> GetTokens();
     
 private:
     vector <Token*> tokens;

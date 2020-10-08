@@ -5,11 +5,11 @@ Parser::Parser(vector <Token> tokensIn) {
 }
 
 bool Parser::Parse() {
-    int index = 0;
     
     
-    if(tokens[index++].GetID() != "SCHEMES") return false;
-    if(tokens[index++].GetID() != "COLON") return false;
+    
+    if(tokens[index].GetID() != "SCHEMES") return false; else index++;
+    if(tokens[index].GetID() != "COLON") return false; else index++;
     if(!Scheme(index)) return false;
     if(!SchemeList(index)) return false;
     if(tokens[index++].GetID() != "COLON") return false;
@@ -25,8 +25,10 @@ bool Parser::Parse() {
 
 
 bool Parser::SchemeList(int &index) {
+#ifndef DEBUG
     cout << "SchemeList: " << index << endl;
-    if(tokens[index++].GetID() == "FACTS") return true; else index--;
+#endif
+    if(tokens[index].GetID() == "FACTS") {index++; return true;}
     
     if(!Scheme(index)) return false;
     if(!SchemeList(index)) return false;
@@ -34,9 +36,10 @@ bool Parser::SchemeList(int &index) {
     return true;
 }
 bool Parser::FactList(int &index) {
+#ifndef DEBUG
     cout << "FactList: " << index << endl;
-
-    if(tokens[index++].GetID() == "RULES") return true; else index--;
+#endif
+    if(tokens[index].GetID() == "RULES") {index++; return true;}
     
     if(!Fact(index)) return false;
     if(!FactList(index)) return false;
@@ -44,9 +47,10 @@ bool Parser::FactList(int &index) {
     return true;
 }
 bool Parser::RuleList(int &index) {
+#ifndef DEBUG
     cout << "RuleList: " << index << endl;
-    
-    if(tokens[index++].GetID() == "QUERIES") return true; else index--;
+#endif
+    if(tokens[index].GetID() == "QUERIES") {index++; return true;}
 
     if(!Rule(index)) return false;
     if(!RuleList(index)) return false;
@@ -54,9 +58,10 @@ bool Parser::RuleList(int &index) {
     return true;
 }
 bool Parser::QueryList(int &index) {
+#ifndef DEBUG
     cout << "QueryList: " << index << endl;
-
-    if(tokens[index++].GetID() == "EOF") return true; else index--;
+#endif
+    if(tokens[index].GetID() == "EOF") {index++; return true;}
     
     if(!Query(index)) return false;
     if(!QueryList(index)) return false;
@@ -64,123 +69,136 @@ bool Parser::QueryList(int &index) {
     return true;
 }
 bool Parser::Scheme(int &index) {
+#ifndef DEBUG
     cout << "Scheme: " << index << endl;
-
-    if(tokens[index++].GetID() != "ID") return false;
-    if(tokens[index++].GetID() != "LEFT_PAREN") return false;
-    if(tokens[index++].GetID() != "ID") return false;
+#endif
+    if(tokens[index].GetID() != "ID") return false; else index++;
+    if(tokens[index].GetID() != "LEFT_PAREN") return false; else index++;
+    if(tokens[index].GetID() != "ID") return false; else index++;
 
     if(!IDList(index)) return false;
     
     return true;
 }
 bool Parser::Fact(int &index) {
+#ifndef DEBUG
     cout << "Fact: " << index << endl;
-
-    if(tokens[index++].GetID() != "ID") return false;
-    if(tokens[index++].GetID() != "LEFT_PAREN") return false;
-    if(tokens[index++].GetID() != "STRING") return false;
+#endif
+    if(tokens[index].GetID() != "ID") return false; else index++;
+    if(tokens[index].GetID() != "LEFT_PAREN") return false; else index++;
+    if(tokens[index].GetID() != "STRING") return false; else index++;
     if(!StringList(index)) return false;
-    if(tokens[index++].GetID() != "PERIOD") return false;
+    if(tokens[index].GetID() != "PERIOD") return false; else index++;
     
     return true;
 }
 bool Parser::Rule(int &index) {
+#ifndef DEBUG
     cout << "Rule: " << index << endl;
-
+#endif
     if(!HeadPredicate(index)) return false;
-    if(tokens[index++].GetID() != "COLON_DASH") return false;
+    if(tokens[index].GetID() != "COLON_DASH") return false; else index++;
     if(!Predicate(index)) return false;
     if(!PredicateList(index)) return false;
 
     return true;
 }
 bool Parser::Query(int &index) {
+#ifndef DEBUG
     cout << "Query: " << index << endl;
-
+#endif
     if(!Predicate(index)) return false;
-    if(tokens[index++].GetID() != "Q_MARK") return false;
+    if(tokens[index].GetID() != "Q_MARK") return false; else index++;
 
     return true;
 }
 bool Parser::HeadPredicate(int &index) {
+#ifndef DEBUG
     cout << "HeadPredicate: " << index << endl;
-
-    if(tokens[index++].GetID() != "ID") return false;
-    if(tokens[index++].GetID() != "LEFT_PAREN") return false;
-    if(tokens[index++].GetID() != "ID") return false;
+#endif
+    if(tokens[index].GetID() != "ID") return false; else index++;
+    if(tokens[index].GetID() != "LEFT_PAREN") return false; else index++;
+    if(tokens[index].GetID() != "ID") return false; else index++;
     if(!IDList(index)) return false;
     
     return true;
 }
 bool Parser::Predicate(int &index) {
+#ifndef DEBUG
     cout << "Predicate: " << index << endl;
-
-    if(tokens[index++].GetID() != "ID") return false;
-    if(tokens[index++].GetID() != "LEFT_PAREN") return false;
+#endif
+    if(tokens[index].GetID() != "ID") return false; else index++;
+    if(tokens[index].GetID() != "LEFT_PAREN") return false; else index++;
     if(!Parameter(index)) return false;
     if(!ParameterList(index)) return false;
     
     return true;
 }
 bool Parser::PredicateList(int &index) {
+#ifndef DEBUG
     cout << "PredicateList: " << index << endl;
-
-    if(tokens[index++].GetID() == "PERIOD") return true; else index--;
+#endif
+    if(tokens[index].GetID() == "PERIOD") {index++; return true;}
     
-    if(tokens[index++].GetID() != "COMMA") return false;
+    if(tokens[index].GetID() != "COMMA") return false; else index++;
     if(!Predicate(index)) return false;
     if(!PredicateList(index)) return false;
 
     return true;
 }
 bool Parser::ParameterList(int &index) {
+#ifndef DEBUG
     cout << "ParameterList: " << index << endl;
+#endif
     
-    if(tokens[index++].GetID() == "RIGHT_PAREN") return true; else index--;
+    if(tokens[index].GetID() == "RIGHT_PAREN") {index++; return true;}
     
-    if(tokens[index++].GetID() != "COMMA") return false;
+    if(tokens[index].GetID() != "COMMA") return false; else index++;
     if(!Parameter(index)) return false;
     if(!ParameterList(index)) return false;
-
     return true;
 }
 bool Parser::StringList(int &index) {
+#ifndef DEBUG
     cout << "StringList: " << index << endl;
-
-    if(tokens[index++].GetID() == "RIGHT_PAREN") return true; else index--;
+#endif
+    if(tokens[index].GetID() == "RIGHT_PAREN") {index++; return true;}
     
-    if(tokens[index++].GetID() != "COMMA") return false;
-    if(tokens[index++].GetID() != "STRING") return false;
+    if(tokens[index].GetID() != "COMMA") return false; else index++;
+    if(tokens[index].GetID() != "STRING") return false; else index++;
     if(!StringList(index)) return false;
     
     return true;;
 }
 bool Parser::IDList(int &index) {
+#ifndef DEBUG
     cout << "IDList: " << index << endl;
-
-    if(tokens[index++].GetID() == "RIGHT_PAREN") return true; else index--;
+#endif
+    if(tokens[index].GetID() == "RIGHT_PAREN") {index++; return true;}
     
     
-    if(tokens[index++].GetID() != "COMMA") return false;
-    if(tokens[index++].GetID() != "ID") return false;
+    if(tokens[index].GetID() != "COMMA") return false; else index++;
+    if(tokens[index].GetID() != "ID") return false; else index++;
     if(!IDList(index)) return false;
     
     return true;
 }
 bool Parser::Parameter(int &index) {
+#ifndef DEBUG
     cout << "Parameter: " << index << endl;
-
+#endif
     if( (tokens[index].GetID() != "STRING") && (tokens[index].GetID() != "ID") && (!Expression(index)) ) return false; else index++;
     
     return true;
 }
 bool Parser::Expression(int &index) {
+#ifndef DEBUG
     cout << "Expression: " << index << endl;
+#endif
 
     if(tokens[index].GetID() == "RIGHT_PAREN") {index++; return true;}
 
-    if(tokens[index++].GetID() != "LEFT_PAREN") return false;
+    if(tokens[index].GetID() != "LEFT_PAREN") return false; else index++;
     if(!Parameter(index)) return false;
     if(!Operator(index)) return false;
     if(!Parameter(index)) return false;
@@ -188,10 +206,15 @@ bool Parser::Expression(int &index) {
     return true;
 }
 bool Parser::Operator(int &index) {
+#ifndef DEBUG
     cout << "Operator: " << index << endl;
-
+#endif
     if( (tokens[index].GetID() != "ADD") && (tokens[index].GetID() != "MULTIPLY") ) return false; else index++;
         
 
     return true;
+}
+
+void Parser::ReturnFailure(ofstream &outFile){
+    tokens[index].Print(outFile);
 }

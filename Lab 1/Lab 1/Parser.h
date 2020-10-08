@@ -27,9 +27,12 @@ public:
     bool Parameter(int &index);
     bool Expression(int &index);
     bool Operator(int &index);
+    
+    void ReturnFailure(ofstream &outFile);
 
 private:
     vector <Token> tokens;
+    int index = 0;
 };
 
 #endif

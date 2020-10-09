@@ -182,7 +182,7 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
         cout << "unable to open file." << endl;
     }
 #ifndef DEBUG
-    cout << "Total Tokens = " << tokens.size() << endl;
+    //cout << "Total Tokens = " << tokens.size() << endl;
 #endif
     //outFile << "Total Tokens = " << tokens.size();
     

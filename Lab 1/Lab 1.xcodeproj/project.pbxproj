@@ -13,7 +13,7 @@
 		CC91676825107A73005D800D /* Tokenizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC91676625107A73005D800D /* Tokenizer.cpp */; };
 		CCE5C4FA252EE989006839BE /* DatalogProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE5C4F8252EE989006839BE /* DatalogProgram.cpp */; };
 		CCE5C4FE252EE9B0006839BE /* Predicate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE5C4FC252EE9B0006839BE /* Predicate.cpp */; };
-		CCE5C502252EE9B6006839BE /* Rule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE5C500252EE9B6006839BE /* Rule.cpp */; };
+		CCE5C502252EE9B6006839BE /* Rules.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE5C500252EE9B6006839BE /* Rules.cpp */; };
 		CCE5C506252EE9C7006839BE /* Parameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE5C504252EE9C7006839BE /* Parameter.cpp */; };
 		CCEC640F252C4147006064DC /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCEC640D252C4147006064DC /* Parser.cpp */; };
 /* End PBXBuildFile section */
@@ -39,12 +39,13 @@
 		CC91676425107A59005D800D /* Lexer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lexer.h; sourceTree = "<group>"; };
 		CC91676625107A73005D800D /* Tokenizer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tokenizer.cpp; sourceTree = "<group>"; };
 		CC91676725107A73005D800D /* Tokenizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tokenizer.h; sourceTree = "<group>"; };
+		CCB79193253009E2001308E2 /* ;lakdjsf.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ";lakdjsf.cpp"; sourceTree = "<group>"; };
 		CCE5C4F8252EE989006839BE /* DatalogProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DatalogProgram.cpp; sourceTree = "<group>"; };
 		CCE5C4F9252EE989006839BE /* DatalogProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatalogProgram.h; sourceTree = "<group>"; };
 		CCE5C4FC252EE9B0006839BE /* Predicate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Predicate.cpp; sourceTree = "<group>"; };
 		CCE5C4FD252EE9B0006839BE /* Predicate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Predicate.h; sourceTree = "<group>"; };
-		CCE5C500252EE9B6006839BE /* Rule.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Rule.cpp; sourceTree = "<group>"; };
-		CCE5C501252EE9B6006839BE /* Rule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rule.h; sourceTree = "<group>"; };
+		CCE5C500252EE9B6006839BE /* Rules.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Rules.cpp; sourceTree = "<group>"; };
+		CCE5C501252EE9B6006839BE /* Rules.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rules.h; sourceTree = "<group>"; };
 		CCE5C504252EE9C7006839BE /* Parameter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Parameter.cpp; sourceTree = "<group>"; };
 		CCE5C505252EE9C7006839BE /* Parameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Parameter.h; sourceTree = "<group>"; };
 		CCEC640D252C4147006064DC /* Parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
@@ -94,10 +95,11 @@
 				CCE5C4F8252EE989006839BE /* DatalogProgram.cpp */,
 				CCE5C4FD252EE9B0006839BE /* Predicate.h */,
 				CCE5C4FC252EE9B0006839BE /* Predicate.cpp */,
-				CCE5C501252EE9B6006839BE /* Rule.h */,
-				CCE5C500252EE9B6006839BE /* Rule.cpp */,
+				CCE5C501252EE9B6006839BE /* Rules.h */,
+				CCE5C500252EE9B6006839BE /* Rules.cpp */,
 				CCE5C505252EE9C7006839BE /* Parameter.h */,
 				CCE5C504252EE9C7006839BE /* Parameter.cpp */,
+				CCB79193253009E2001308E2 /* ;lakdjsf.cpp */,
 			);
 			path = "Lab 1";
 			sourceTree = "<group>";
@@ -161,7 +163,7 @@
 			files = (
 				CC91676525107A59005D800D /* Lexer.cpp in Sources */,
 				CCE5C506252EE9C7006839BE /* Parameter.cpp in Sources */,
-				CCE5C502252EE9B6006839BE /* Rule.cpp in Sources */,
+				CCE5C502252EE9B6006839BE /* Rules.cpp in Sources */,
 				CCE5C4FA252EE989006839BE /* DatalogProgram.cpp in Sources */,
 				CC91676825107A73005D800D /* Tokenizer.cpp in Sources */,
 				CC91675A251078EF005D800D /* main.cpp in Sources */,

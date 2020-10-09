@@ -12,7 +12,7 @@ Token::Token(int tokenID, string value, int line, ofstream &outFile){
 
 void Token::Print(ofstream &outFile) {
 #ifndef DEBUG
-    cout << "  (" << enumString << ",\"" << stringValue << "\"," << lineNumber << ")" << endl;
+    //cout << "  (" << enumString << ",\"" << stringValue << "\"," << lineNumber << ")" << endl;
 #endif
     outFile << "  (" << enumString << ",\"" << stringValue << "\"," << lineNumber << ")" << endl;
     

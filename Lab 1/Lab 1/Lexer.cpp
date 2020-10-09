@@ -7,7 +7,7 @@ Lexer::Lexer(string inFile, ofstream &outFile){
     for(int i = 0; i < tokenizer.GetTokens().size(); i++) {
         tokens.push_back(*tokenizer.GetTokens()[i]);
     }
-
+    
 }
 
 vector <Token> Lexer::GetTokens(){

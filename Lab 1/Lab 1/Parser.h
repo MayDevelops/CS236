@@ -2,13 +2,15 @@
 #define Parser_h
 
 #include "Token.h"
+#include "DatalogProgram.h"
+#include "Predicate.h"
 
 #include <stdio.h>
 #include <vector>
 
 class Parser {
 public:
-    Parser(vector <Token> tokensIn);
+    Parser(vector <Token> tokensIn, DatalogProgram &datalogProgram);
     bool Parse();
     bool SchemeList(int &index);
     bool FactList(int &index);
@@ -19,7 +21,7 @@ public:
     bool Rule(int &index);
     bool Query(int &index);
     bool HeadPredicate(int &index);
-    bool Predicate(int &index);
+    bool Predicates(int &index);
     bool PredicateList(int &index);
     bool ParameterList(int &index);
     bool StringList(int &index);
@@ -29,10 +31,14 @@ public:
     bool Operator(int &index);
     
     void ReturnFailure(ofstream &outFile);
-
+    
 private:
     vector <Token> tokens;
     int index = 0;
+    vector <Predicate*> predicateContainer;
+    DatalogProgram *dlp = NULL;
+    Predicate* tempHeadPred = NULL;
+    bool headPred;
 };
 
 #endif

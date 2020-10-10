@@ -39,7 +39,6 @@
 		CC91676425107A59005D800D /* Lexer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lexer.h; sourceTree = "<group>"; };
 		CC91676625107A73005D800D /* Tokenizer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tokenizer.cpp; sourceTree = "<group>"; };
 		CC91676725107A73005D800D /* Tokenizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tokenizer.h; sourceTree = "<group>"; };
-		CCB79193253009E2001308E2 /* ;lakdjsf.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ";lakdjsf.cpp"; sourceTree = "<group>"; };
 		CCE5C4F8252EE989006839BE /* DatalogProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DatalogProgram.cpp; sourceTree = "<group>"; };
 		CCE5C4F9252EE989006839BE /* DatalogProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatalogProgram.h; sourceTree = "<group>"; };
 		CCE5C4FC252EE9B0006839BE /* Predicate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Predicate.cpp; sourceTree = "<group>"; };
@@ -99,7 +98,6 @@
 				CCE5C500252EE9B6006839BE /* Rules.cpp */,
 				CCE5C505252EE9C7006839BE /* Parameter.h */,
 				CCE5C504252EE9C7006839BE /* Parameter.cpp */,
-				CCB79193253009E2001308E2 /* ;lakdjsf.cpp */,
 			);
 			path = "Lab 1";
 			sourceTree = "<group>";

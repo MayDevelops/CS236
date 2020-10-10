@@ -20,6 +20,8 @@ void Predicate::AddParameter(string s) {
 
 string Predicate::ToString() {
     if(tokenClassification == 's') {
+        buildS.str("");
+        
         buildS << "  ";
         buildS << ID;
         buildS << "(";
@@ -35,6 +37,8 @@ string Predicate::ToString() {
         
         return buildS.str();
     } else if (tokenClassification == 'f') {
+        buildS.str("");
+        
         buildS << "  ";
         buildS << ID;
         buildS << "(";
@@ -51,6 +55,8 @@ string Predicate::ToString() {
         
         return buildS.str();
     } else {
+        buildS.str("");
+        
         buildS << "  ";
         buildS << ID;
         buildS << "(";

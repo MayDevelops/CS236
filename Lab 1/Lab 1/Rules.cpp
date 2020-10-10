@@ -7,6 +7,8 @@ Rules::Rules(Predicate *head, vector <Predicate*> inBody) {
 
 
 string Rules::ToString() {
+    buildS.str("");
+    
     buildS << "  ";
     buildS << headPred->GetID();
     buildS << "(";
@@ -18,8 +20,10 @@ string Rules::ToString() {
         buildS << "(";
         buildS << body[i]->GetParameters();
         buildS << ")";
+        if(i != body.size() - 1) {
+            buildS << ",";
+        }
     }
-    
     buildS << ".";
     return buildS.str();
 }

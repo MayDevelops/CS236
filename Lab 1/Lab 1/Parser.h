@@ -31,14 +31,14 @@ public:
     bool Operator(int &index);
     
     void ReturnFailure(ofstream &outFile);
+    int CalculateContainerIndex();
     
 private:
     vector <Token> tokens;
     int index = 0;
     vector <Predicate*> predicateContainer;
     DatalogProgram *dlp = NULL;
-    Predicate* tempHeadPred = NULL;
-    bool headPred;
+    
 };
 
 #endif

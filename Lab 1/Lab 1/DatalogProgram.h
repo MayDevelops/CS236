@@ -26,7 +26,11 @@ public:
     void SetDomains(string s);
     void SetRules(Rules *obj);
     string RulesToString();
-    
+    void Temp() {
+        for(int i = 0 ;i < rules.size(); i++) {
+            cout << rules[i]->ToString() << endl;
+        }
+    }
     
     
     

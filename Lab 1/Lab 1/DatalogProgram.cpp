@@ -23,6 +23,7 @@ DatalogProgram::~DatalogProgram(){
 }
 
 void DatalogProgram::ToString(ofstream &outFile) {
+    
     outFile << "Schemes(" << schemes.size() << "):" << endl;
     for(int i = 0; i < schemes.size(); i++) {
         outFile << schemes[i]->ToString() << endl;
@@ -45,6 +46,7 @@ void DatalogProgram::ToString(ofstream &outFile) {
         outFile << "  " << (*it) << endl;
     }
     
+#ifndef DEBUG
     /*
      cout << "Schemes(" << schemes.size() << "):" << endl;
      for(int i = 0; i < schemes.size(); i++) {
@@ -54,12 +56,12 @@ void DatalogProgram::ToString(ofstream &outFile) {
      for(int i = 0; i < facts.size(); i++) {
      cout << facts[i]->ToString() << endl;
      }
-     
+     */
      cout << "Rules(" << rules.size() << "):" << endl;
      for(int i = 0; i < rules.size(); i++) {
      cout << rules[i]->ToString() << endl;
      }
-     
+     /*
      cout << "Queries(" << queries.size() << "):" << endl;
      for(int i = 0; i < queries.size(); i++) {
      cout << queries[i]->ToString() << endl;
@@ -71,6 +73,7 @@ void DatalogProgram::ToString(ofstream &outFile) {
      cout << "  " << (*it2) << endl;
      }
      */
+#endif
 }
 
 void DatalogProgram::SetSchemes(Predicate *obj) {

@@ -1,4 +1,4 @@
-g++ -Wall -Werror -std=c++17 -g *.cpp -o Lab2
+g++ -Wall -Werror -std=c++17 -g -DDEBUG *.cpp -o Lab2
 
 echo Testing 1-80 cases...
 echo File0:

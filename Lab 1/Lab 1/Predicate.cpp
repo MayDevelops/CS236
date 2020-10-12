@@ -1,7 +1,7 @@
 #include "Predicate.h"
 
 Predicate::~Predicate() {
-    for(int i = 0; i < parameters.size(); i++) {
+    for(unsigned int i = 0; i < parameters.size(); i++) {
         delete parameters[i];
     }
     parameters.clear();
@@ -12,6 +12,7 @@ Predicate::Predicate() {
 }
 Predicate::Predicate(string s) {
     ID = s;
+
 }
 
 void Predicate::AddParameter(string s) {
@@ -25,7 +26,7 @@ string Predicate::ToString() {
         ss << "  ";
         ss << ID;
         ss << "(";
-        for(int i = 0; i < parameters.size(); i++) {
+        for(unsigned int i = 0; i < parameters.size(); i++) {
             ss << parameters[i]->GetParameter();
             if(parameters[i]->GetParameter() == "(") continue;
             if(i != parameters.size() - 1 && parameters[i + 1]->GetParameter() == "+") continue;
@@ -48,7 +49,7 @@ string Predicate::ToString() {
         ss << "  ";
         ss << ID;
         ss << "(";
-        for(int i = 0; i < parameters.size(); i++) {
+        for(unsigned int i = 0; i < parameters.size(); i++) {
             ss << parameters[i]->GetParameter();
             if(parameters[i]->GetParameter() == "(") continue;
             if(i != parameters.size() - 1 && parameters[i + 1]->GetParameter() == "+") continue;
@@ -72,7 +73,7 @@ string Predicate::ToString() {
         ss << "  ";
         ss << ID;
         ss << "(";
-        for(int i = 0; i < parameters.size(); i++) {
+        for(unsigned int i = 0; i < parameters.size(); i++) {
             ss << parameters[i]->GetParameter();
             if(parameters[i]->GetParameter() == "(") continue;
             if(i != parameters.size() - 1 && parameters[i + 1]->GetParameter() == "+") continue;
@@ -102,7 +103,7 @@ string Predicate::GetID(){
 }
 string Predicate::GetParameters(){
     stringstream s;
-    for(int i = 0; i < parameters.size(); i++) {
+    for(unsigned int i = 0; i < parameters.size(); i++) {
         
         s << parameters[i]->GetParameter();
         if(parameters[i]->GetParameter() == "(") continue;

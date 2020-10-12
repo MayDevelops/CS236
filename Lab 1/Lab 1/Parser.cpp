@@ -255,6 +255,6 @@ int Parser::CalculateContainerIndex() {
     if(predicateContainer.size() == 1) {
         return 0;
     } else {
-        return(predicateContainer.size() - 1);
+        return((int)predicateContainer.size() - 1);
     }
 }

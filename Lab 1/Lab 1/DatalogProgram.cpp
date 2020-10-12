@@ -25,19 +25,19 @@ DatalogProgram::~DatalogProgram(){
 void DatalogProgram::ToString(ofstream &outFile) {
     
     outFile << "Schemes(" << schemes.size() << "):" << endl;
-    for(int i = 0; i < schemes.size(); i++) {
+    for(unsigned int i = 0; i < schemes.size(); i++) {
         outFile << schemes[i]->ToString() << endl;
     }
     outFile << "Facts(" << facts.size() << "):" << endl;
-    for(int i = 0; i < facts.size(); i++) {
+    for(unsigned int i = 0; i < facts.size(); i++) {
         outFile << facts[i]->ToString() << endl;
     }
     outFile << "Rules(" << rules.size() << "):" << endl;
-    for(int i = 0; i < rules.size(); i++) {
+    for(unsigned int i = 0; i < rules.size(); i++) {
         outFile << rules[i]->ToString() << endl;
     }
     outFile << "Queries(" << queries.size() << "):" << endl;
-    for(int i = 0; i < queries.size(); i++) {
+    for(unsigned int i = 0; i < queries.size(); i++) {
         outFile << queries[i]->ToString() << endl;
     }
     outFile << "Domain(" << domains.size() << "):" << endl;
@@ -49,21 +49,21 @@ void DatalogProgram::ToString(ofstream &outFile) {
     
     
     cout << "Schemes(" << schemes.size() << "):" << endl;
-    for(int i = 0; i < schemes.size(); i++) {
+    for(unsigned int i = 0; i < schemes.size(); i++) {
         cout << schemes[i]->ToString() << endl;
     }
     cout << "Facts(" << facts.size() << "):" << endl;
-    for(int i = 0; i < facts.size(); i++) {
+    for(unsigned int i = 0; i < facts.size(); i++) {
         cout << facts[i]->ToString() << endl;
     }
     
     cout << "Rules(" << rules.size() << "):" << endl;
-    for(int i = 0; i < rules.size(); i++) {
+    for(unsigned int i = 0; i < rules.size(); i++) {
         cout << rules[i]->ToString() << endl;
     }
     
     cout << "Queries(" << queries.size() << "):" << endl;
-    for(int i = 0; i < queries.size(); i++) {
+    for(unsigned int i = 0; i < queries.size(); i++) {
         cout << queries[i]->ToString() << endl;
     }
     

@@ -17,7 +17,7 @@ int main(int argc, const char * argv[]) {
     vector <string> outTwoEightyFiles = {"out0.txt", "out1.txt", "out2.txt"};
     //"out0.txt", "out1.txt", "out2.txt", "out3.txt", "out4.txt", "out5.txt", "out6.txt", "out7.txt", "out8.txt"
     
-    for(int i = 0; i < twoEightyFiles.size(); i++) {
+    for(unsigned int i = 0; i < twoEightyFiles.size(); i++) {
         ofstream outFile (outTwoEightyFiles[i]);
         Lexer lexer(twoEightyFiles[i], outFile);
         DatalogProgram datalogProgram;

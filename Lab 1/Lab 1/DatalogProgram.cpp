@@ -46,34 +46,34 @@ void DatalogProgram::ToString(ofstream &outFile) {
         outFile << "  " << (*it) << endl;
     }
     
-#ifndef DEBUG
-    /*
-     cout << "Schemes(" << schemes.size() << "):" << endl;
-     for(int i = 0; i < schemes.size(); i++) {
-     cout << schemes[i]->ToString() << endl;
-     }
-     cout << "Facts(" << facts.size() << "):" << endl;
-     for(int i = 0; i < facts.size(); i++) {
-     cout << facts[i]->ToString() << endl;
-     }
-     */
-     cout << "Rules(" << rules.size() << "):" << endl;
-     for(int i = 0; i < rules.size(); i++) {
-     cout << rules[i]->ToString() << endl;
-     }
-     /*
-     cout << "Queries(" << queries.size() << "):" << endl;
-     for(int i = 0; i < queries.size(); i++) {
-     cout << queries[i]->ToString() << endl;
-     }
-     
-     cout << "Domain(" << domains.size()  << "):" << endl;
-     set <string>::iterator it2;
-     for(it2 = domains.begin(); it2 != domains.end(); it2++) {
-     cout << "  " << (*it2) << endl;
-     }
-     */
-#endif
+    
+    
+    cout << "Schemes(" << schemes.size() << "):" << endl;
+    for(int i = 0; i < schemes.size(); i++) {
+        cout << schemes[i]->ToString() << endl;
+    }
+    cout << "Facts(" << facts.size() << "):" << endl;
+    for(int i = 0; i < facts.size(); i++) {
+        cout << facts[i]->ToString() << endl;
+    }
+    
+    cout << "Rules(" << rules.size() << "):" << endl;
+    for(int i = 0; i < rules.size(); i++) {
+        cout << rules[i]->ToString() << endl;
+    }
+    
+    cout << "Queries(" << queries.size() << "):" << endl;
+    for(int i = 0; i < queries.size(); i++) {
+        cout << queries[i]->ToString() << endl;
+    }
+    
+    cout << "Domain(" << domains.size()  << "):" << endl;
+    set <string>::iterator it2;
+    for(it2 = domains.begin(); it2 != domains.end(); it2++) {
+        cout << "  " << (*it2) << endl;
+    }
+    
+
 }
 
 void DatalogProgram::SetSchemes(Predicate *obj) {

@@ -20,58 +20,76 @@ void Predicate::AddParameter(string s) {
 
 string Predicate::ToString() {
     if(tokenClassification == 's') {
-        buildS.str("");
+        ss.str("");
         
-        buildS << "  ";
-        buildS << ID;
-        buildS << "(";
+        ss << "  ";
+        ss << ID;
+        ss << "(";
         for(int i = 0; i < parameters.size(); i++) {
-            buildS << parameters[i]->GetParameter();
+            ss << parameters[i]->GetParameter();
+            if(parameters[i]->GetParameter() == "(") continue;
+            if(i != parameters.size() - 1 && parameters[i + 1]->GetParameter() == "+") continue;
+            if(i != parameters.size() - 1 && parameters[i + 1]->GetParameter() == "*") continue;
+            if(parameters[i]->GetParameter() == "+") continue;
+            if(parameters[i]->GetParameter() == "*") continue;
+            if(i != parameters.size() - 1 && parameters[i + 1]->GetParameter() == ")") continue;
             if(i == parameters.size() - 1) {
                 
             }else {
-                buildS << ",";
+                ss << ",";
             }
         }
-        buildS << ")";
+        ss << ")";
         
-        return buildS.str();
+        return ss.str();
     } else if (tokenClassification == 'f') {
-        buildS.str("");
+        ss.str("");
         
-        buildS << "  ";
-        buildS << ID;
-        buildS << "(";
+        ss << "  ";
+        ss << ID;
+        ss << "(";
         for(int i = 0; i < parameters.size(); i++) {
-            buildS << parameters[i]->GetParameter();
+            ss << parameters[i]->GetParameter();
+            if(parameters[i]->GetParameter() == "(") continue;
+            if(i != parameters.size() - 1 && parameters[i + 1]->GetParameter() == "+") continue;
+            if(i != parameters.size() - 1 && parameters[i + 1]->GetParameter() == "*") continue;
+            if(parameters[i]->GetParameter() == "+") continue;
+            if(parameters[i]->GetParameter() == "*") continue;
+            if(i != parameters.size() - 1 && parameters[i + 1]->GetParameter() == ")") continue;
             if(i == parameters.size() - 1) {
                 
             }else {
-                buildS << ",";
+                ss << ",";
             }
         }
-        buildS << ")";
-        buildS << ".";
+        ss << ")";
+        ss << ".";
         
-        return buildS.str();
+        return ss.str();
     } else {
-        buildS.str("");
+        ss.str("");
         
-        buildS << "  ";
-        buildS << ID;
-        buildS << "(";
+        ss << "  ";
+        ss << ID;
+        ss << "(";
         for(int i = 0; i < parameters.size(); i++) {
-            buildS << parameters[i]->GetParameter();
+            ss << parameters[i]->GetParameter();
+            if(parameters[i]->GetParameter() == "(") continue;
+            if(i != parameters.size() - 1 && parameters[i + 1]->GetParameter() == "+") continue;
+            if(i != parameters.size() - 1 && parameters[i + 1]->GetParameter() == "*") continue;
+            if(parameters[i]->GetParameter() == "+") continue;
+            if(parameters[i]->GetParameter() == "*") continue;
+            if(i != parameters.size() - 1 && parameters[i + 1]->GetParameter() == ")") continue;
             if(i == parameters.size() - 1) {
                 
             }else {
-                buildS << ",";
+                ss << ",";
             }
         }
-        buildS << ")";
-        buildS << "?";
+        ss << ")";
+        ss << "?";
         
-        return buildS.str();
+        return ss.str();
     }
 }
 
@@ -85,7 +103,14 @@ string Predicate::GetID(){
 string Predicate::GetParameters(){
     stringstream s;
     for(int i = 0; i < parameters.size(); i++) {
+        
         s << parameters[i]->GetParameter();
+        if(parameters[i]->GetParameter() == "(") continue;
+        if(i != parameters.size() - 1 && parameters[i + 1]->GetParameter() == "+") continue;
+        if(i != parameters.size() - 1 && parameters[i + 1]->GetParameter() == "*") continue;
+        if(parameters[i]->GetParameter() == "+") continue;
+        if(parameters[i]->GetParameter() == "*") continue;
+        if(i != parameters.size() - 1 && parameters[i + 1]->GetParameter() == ")") continue;
         if(i == parameters.size() - 1) {
             
         }else {

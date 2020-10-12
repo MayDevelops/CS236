@@ -81,7 +81,7 @@ bool Parser::FactList(int &index) {
 //only care about ID's, strings, expressions
 bool Parser::Rule(int &index) {
 #ifndef DEBUG
-   // cout << "Rule: " << index << endl;
+    // cout << "Rule: " << index << endl;
 #endif
     if(!HeadPredicate(index)) return false;
     Predicate* tempHeadPred = predicateContainer[0];
@@ -150,7 +150,7 @@ bool Parser::HeadPredicate(int &index) {
 
 bool Parser::Predicates(int &index) {
 #ifndef DEBUG
-    cout << "Predicate: " << index << endl;
+    //cout << "Predicate: " << index << endl;
 #endif
     
     
@@ -182,7 +182,7 @@ bool Parser::StringList(int &index) {
     if(tokens[index].GetID() == "RIGHT_PAREN") {index++; return true;}
     
     if(tokens[index].GetID() != "COMMA") return false; else index++;
-    if(tokens[index].GetID() != "STRING") return false; else {predicateContainer[0]->AddParameter(tokens[index].GetValue()); dlp->SetDomains((tokens[index].GetValue())); index++;}
+    if(tokens[index].GetID() != "STRING") return false; else {predicateContainer[CalculateContainerIndex()]->AddParameter(tokens[index].GetValue()); dlp->SetDomains((tokens[index].GetValue())); index++;}
     if(!StringList(index)) return false;
     
     return true;;
@@ -194,14 +194,14 @@ bool Parser::IDList(int &index) {
 #endif
     if(tokens[index].GetID() == "RIGHT_PAREN") {index++; return true;}
     if(tokens[index].GetID() != "COMMA") return false; else index++;
-    if(tokens[index].GetID() != "ID") return false; else {predicateContainer[0]->AddParameter(tokens[index].GetValue()); index++;}
+    if(tokens[index].GetID() != "ID") return false; else {predicateContainer[CalculateContainerIndex()]->AddParameter(tokens[index].GetValue()); index++;}
     if(!IDList(index)) return false;
     return true;
 }
 
 bool Parser::Parameter(int &index) {
 #ifndef DEBUG
-    cout << "Parameter: " << index << endl;
+    //cout << "Parameter: " << index << endl;
 #endif
     
     if( (tokens[index].GetID() != "STRING") && (tokens[index].GetID() != "ID") && (!Expression(index)) ) return false; else {predicateContainer[CalculateContainerIndex()]->AddParameter(tokens[index].GetValue()); index++;}
@@ -211,7 +211,7 @@ bool Parser::Parameter(int &index) {
 
 bool Parser::ParameterList(int &index) {
 #ifndef DEBUG
-    cout << "ParameterList: " << index << endl;
+    //cout << "ParameterList: " << index << endl;
 #endif
     
     if(tokens[index].GetID() == "RIGHT_PAREN") {index++; return true;}
@@ -224,11 +224,11 @@ bool Parser::ParameterList(int &index) {
 
 bool Parser::Expression(int &index) {
 #ifndef DEBUG
-    cout << "Expression: " << index << endl;
+    //cout << "Expression: " << index << endl;
 #endif
     if(tokens[index].GetID() == "RIGHT_PAREN") {index++; return true;}
     
-    if(tokens[index].GetID() != "LEFT_PAREN") return false; else index++;
+    if(tokens[index].GetID() != "LEFT_PAREN") return false; else {predicateContainer[CalculateContainerIndex()]->AddParameter(tokens[index].GetValue()); index++;}
     if(!Parameter(index)) return false;
     if(!Operator(index)) return false;
     if(!Parameter(index)) return false;
@@ -238,9 +238,9 @@ bool Parser::Expression(int &index) {
 
 bool Parser::Operator(int &index) {
 #ifndef DEBUG
-    cout << "Operator: " << index << endl;
+    //cout << "Operator: " << index << endl;
 #endif
-    if( (tokens[index].GetID() != "ADD") && (tokens[index].GetID() != "MULTIPLY") ) return false; else index++;
+    if( (tokens[index].GetID() != "ADD") && (tokens[index].GetID() != "MULTIPLY") ) return false; else {predicateContainer[CalculateContainerIndex()]->AddParameter(tokens[index].GetValue()); index++;}
     
     
     return true;
@@ -251,7 +251,7 @@ void Parser::ReturnFailure(ofstream &outFile){
 }
 
 int Parser::CalculateContainerIndex() {
-  
+    
     if(predicateContainer.size() == 1) {
         return 0;
     } else {

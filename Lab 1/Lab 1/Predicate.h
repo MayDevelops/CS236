@@ -20,7 +20,7 @@ public:
 private:
     string ID;
     vector <Parameter*> parameters;
-    stringstream buildS;
+    stringstream ss;
     char tokenClassification = '\a';
 };
 #endif

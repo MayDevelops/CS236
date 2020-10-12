@@ -1,22 +1,22 @@
 #include "DatalogProgram.h"
 
 DatalogProgram::~DatalogProgram(){
-    for(int i = 0; i < schemes.size(); i++) {
+    for(unsigned int i = 0; i < schemes.size(); i++) {
         delete schemes[i];
     }
     schemes.clear();
     
-    for(int i = 0; i < facts.size(); i++) {
+    for(unsigned int i = 0; i < facts.size(); i++) {
         delete facts[i];
     }
     facts.clear();
     
-    for(int i = 0; i < queries.size(); i++) {
+    for(unsigned int i = 0; i < queries.size(); i++) {
         delete queries[i];
     }
     queries.clear();
     
-    for(int i = 0; i < rules.size(); i++) {
+    for(unsigned int i = 0; i < rules.size(); i++) {
         delete rules[i];
     }
     rules.clear();
@@ -73,7 +73,7 @@ void DatalogProgram::ToString(ofstream &outFile) {
         cout << "  " << (*it2) << endl;
     }
     
-
+    
 }
 
 void DatalogProgram::SetSchemes(Predicate *obj) {

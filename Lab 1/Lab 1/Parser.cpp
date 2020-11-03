@@ -246,8 +246,8 @@ bool Parser::Operator(int &index) {
     return true;
 }
 
-void Parser::ReturnFailure(ofstream &outFile){
-    tokens[index].Print(outFile);
+void Parser::ReturnFailure(){
+    tokens[index].Print();
 }
 
 int Parser::CalculateContainerIndex() {

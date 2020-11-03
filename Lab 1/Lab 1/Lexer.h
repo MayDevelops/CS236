@@ -14,7 +14,7 @@ using namespace std;
 class Lexer {
 public:
     
-    Lexer(string inFile, ofstream &outFile);
+    Lexer(string inFile);
     vector <Token> GetTokens();
     
 private:

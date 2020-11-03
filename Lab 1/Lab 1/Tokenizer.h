@@ -16,9 +16,9 @@ class Tokenizer {
 public:
     
     Tokenizer();
-    Tokenizer(string inFile, ofstream &outFile);
+    Tokenizer(string inFile);
     ~Tokenizer();
-    void ParseFileInput(string inFile, ofstream &outFile);
+    void ParseFileInput(string inFile);
     string PrintChars(vector <char> chars);
     bool CheckCharApproval(char c);
     vector <Token*> GetTokens();

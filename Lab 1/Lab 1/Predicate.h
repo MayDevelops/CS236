@@ -17,7 +17,8 @@ public:
     void SetClassification(char classification);
     string GetID();
     string GetParameters();
-private:
+
+    
     string ID;
     vector <Parameter*> parameters;
     stringstream ss;

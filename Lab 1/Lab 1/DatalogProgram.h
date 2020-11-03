@@ -6,7 +6,6 @@
 #include <fstream>
 #include <vector>
 #include <set>
-#include <sstream>
 
 #include "Predicate.h"
 #include "Parameter.h"
@@ -17,9 +16,10 @@ using namespace std;
 
 class DatalogProgram {
 public:
+    DatalogProgram();
     ~DatalogProgram();
     
-    void ToString(ofstream &outFile);
+    void ToString();
     void SetSchemes(Predicate* obj);
     void SetFacts(Predicate* obj);
     void SetQueries(Predicate* obj);
@@ -27,16 +27,12 @@ public:
     void SetRules(Rules *obj);
     string RulesToString();
 
-private:
+
     vector <Predicate*> schemes;
     vector <Predicate*> facts;
     vector <Predicate*> queries;
     set <string> domains;
     vector <Rules*> rules;
-    string tempString = "";
-    stringstream ss;
-    
-    
 };
 
 

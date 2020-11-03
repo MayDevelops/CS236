@@ -4,8 +4,8 @@ Tokenizer::Tokenizer(){
     //default
 }
 
-Tokenizer::Tokenizer(string inFile, ofstream &outFile){
-    ParseFileInput(inFile, outFile);
+Tokenizer::Tokenizer(string inFile){
+    ParseFileInput(inFile);
 }
 
 Tokenizer::~Tokenizer(){
@@ -14,7 +14,7 @@ Tokenizer::~Tokenizer(){
     }
 }
 
-void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
+void Tokenizer::ParseFileInput(string inFile) {
     ifstream file;
     file.open(inFile);
     char inChar = '\a';
@@ -30,7 +30,7 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
                 if(file.peek() == -1) {
                     lineNumber = lineNumber + tempLineNumber;
                     tempLineNumber = 0;
-                    tokens.push_back(new Token(17,"",lineNumber, outFile));
+                    tokens.push_back(new Token(17,"",lineNumber));
                 }
                 break;
             }
@@ -47,47 +47,47 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
             
             if(!isalpha(inChar) && CheckCharApproval(inChar)){
                 word += inChar;
-                tokens.push_back(new Token(16,word,lineNumber, outFile));
+                tokens.push_back(new Token(16,word,lineNumber));
                 enterSwitch = false;
             }
             if(enterSwitch) {
                 switch (inChar) {
                     case ',' : {
-                        tokens.push_back(new Token(0,",",lineNumber, outFile));
+                        tokens.push_back(new Token(0,",",lineNumber));
                         break;
                     }
                     case '.' : {
-                        tokens.push_back(new Token(1,".",lineNumber, outFile));
+                        tokens.push_back(new Token(1,".",lineNumber));
                         break;
                     }
                     case '?' : {
-                        tokens.push_back(new Token(2,"?",lineNumber, outFile));
+                        tokens.push_back(new Token(2,"?",lineNumber));
                         break;
                     }
                     case '(' : {
-                        tokens.push_back(new Token(3,"(",lineNumber, outFile));
+                        tokens.push_back(new Token(3,"(",lineNumber));
                         break;
                     }
                     case ')' : {
-                        tokens.push_back(new Token(4,")",lineNumber, outFile));
+                        tokens.push_back(new Token(4,")",lineNumber));
                         break;
                     }
                     case ':' : {
                         if(file.peek() == '-'){
                             inChar = file.get();
-                            tokens.push_back(new Token(6,":-",lineNumber, outFile));
+                            tokens.push_back(new Token(6,":-",lineNumber));
                             break;
                         } else {
-                            tokens.push_back(new Token(5,":",lineNumber, outFile));
+                            tokens.push_back(new Token(5,":",lineNumber));
                             break;
                         }
                     }
                     case '*' : {
-                        tokens.push_back(new Token(7,"*",lineNumber, outFile));
+                        tokens.push_back(new Token(7,"*",lineNumber));
                         break;
                     }
                     case '+' : {
-                        tokens.push_back(new Token(8,"+",lineNumber, outFile));
+                        tokens.push_back(new Token(8,"+",lineNumber));
                         break;
                     }
                     case '#' : { //FIXME:: still need to implement the block comment rules here
@@ -114,7 +114,7 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
                                 }
                             }
                             if(undefined){
-                                tokens.push_back(new Token(16,word,lineNumber, outFile));
+                                tokens.push_back(new Token(16,word,lineNumber));
                             }
                             break;
                         } else {
@@ -150,9 +150,9 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
                             word += inChar;
                         }
                         if(numQ % 2 != 0) {
-                            tokens.push_back(new Token(16,word,lineNumber, outFile));
+                            tokens.push_back(new Token(16,word,lineNumber));
                         }else {
-                            tokens.push_back(new Token(14,word,lineNumber, outFile));
+                            tokens.push_back(new Token(14,word,lineNumber));
                         }
                     }
                 }
@@ -166,15 +166,15 @@ void Tokenizer::ParseFileInput(string inFile, ofstream &outFile) {
                 file.putback(inChar);
                 
                 if(word == "Schemes") {
-                    tokens.push_back(new Token(9,"Schemes",lineNumber, outFile));
+                    tokens.push_back(new Token(9,"Schemes",lineNumber));
                 } else if (word == "Facts") {
-                    tokens.push_back(new Token(10,"Facts",lineNumber, outFile));
+                    tokens.push_back(new Token(10,"Facts",lineNumber));
                 } else if (word == "Rules") {
-                    tokens.push_back(new Token(11,"Rules",lineNumber, outFile));
+                    tokens.push_back(new Token(11,"Rules",lineNumber));
                 } else if (word == "Queries") {
-                    tokens.push_back(new Token(12,"Queries",lineNumber, outFile));
+                    tokens.push_back(new Token(12,"Queries",lineNumber));
                 } else {//this is ID
-                    tokens.push_back(new Token(13,word,lineNumber, outFile));
+                    tokens.push_back(new Token(13,word,lineNumber));
                 }
             }
         }

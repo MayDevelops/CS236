@@ -1,4 +1,7 @@
 #include "DatalogProgram.h"
+DatalogProgram::DatalogProgram() {
+    //default constructor
+}
 
 DatalogProgram::~DatalogProgram(){
     for(unsigned int i = 0; i < schemes.size(); i++) {
@@ -22,32 +25,7 @@ DatalogProgram::~DatalogProgram(){
     rules.clear();
 }
 
-void DatalogProgram::ToString(ofstream &outFile) {
-    
-    outFile << "Schemes(" << schemes.size() << "):" << endl;
-    for(unsigned int i = 0; i < schemes.size(); i++) {
-        outFile << schemes[i]->ToString() << endl;
-    }
-    outFile << "Facts(" << facts.size() << "):" << endl;
-    for(unsigned int i = 0; i < facts.size(); i++) {
-        outFile << facts[i]->ToString() << endl;
-    }
-    outFile << "Rules(" << rules.size() << "):" << endl;
-    for(unsigned int i = 0; i < rules.size(); i++) {
-        outFile << rules[i]->ToString() << endl;
-    }
-    outFile << "Queries(" << queries.size() << "):" << endl;
-    for(unsigned int i = 0; i < queries.size(); i++) {
-        outFile << queries[i]->ToString() << endl;
-    }
-    outFile << "Domain(" << domains.size() << "):" << endl;
-    set <string>::iterator it;
-    for(it = domains.begin(); it != domains.end(); it++) {
-        outFile << "  " << (*it) << endl;
-    }
-    
-    
-    
+void DatalogProgram::ToString() {
     cout << "Schemes(" << schemes.size() << "):" << endl;
     for(unsigned int i = 0; i < schemes.size(); i++) {
         cout << schemes[i]->ToString() << endl;
@@ -72,8 +50,6 @@ void DatalogProgram::ToString(ofstream &outFile) {
     for(it2 = domains.begin(); it2 != domains.end(); it2++) {
         cout << "  " << (*it2) << endl;
     }
-    
-    
 }
 
 void DatalogProgram::SetSchemes(Predicate *obj) {

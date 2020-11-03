@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC2F12AA2550ED21006CCA85 /* Database.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2F12A82550ED21006CCA85 /* Database.cpp */; };
+		CC2F12AE2550ED37006CCA85 /* Relation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2F12AC2550ED37006CCA85 /* Relation.cpp */; };
+		CC2F12B22550ED3D006CCA85 /* Header.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2F12B02550ED3D006CCA85 /* Header.cpp */; };
+		CC2F12C32550F6FE006CCA85 /* Interpreter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2F12C12550F6FE006CCA85 /* Interpreter.cpp */; };
+		CC2F12D7255105CD006CCA85 /* Tuple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2F12D5255105CD006CCA85 /* Tuple.cpp */; };
 		CC91675A251078EF005D800D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC916759251078EF005D800D /* main.cpp */; };
 		CC91676225107A35005D800D /* Token.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC91676025107A35005D800D /* Token.cpp */; };
 		CC91676525107A59005D800D /* Lexer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC91676325107A59005D800D /* Lexer.cpp */; };
@@ -31,6 +36,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CC2F12A82550ED21006CCA85 /* Database.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Database.cpp; sourceTree = "<group>"; };
+		CC2F12A92550ED21006CCA85 /* Database.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
+		CC2F12AC2550ED37006CCA85 /* Relation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Relation.cpp; sourceTree = "<group>"; };
+		CC2F12AD2550ED37006CCA85 /* Relation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Relation.h; sourceTree = "<group>"; };
+		CC2F12B02550ED3D006CCA85 /* Header.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Header.cpp; sourceTree = "<group>"; };
+		CC2F12B12550ED3D006CCA85 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		CC2F12C12550F6FE006CCA85 /* Interpreter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Interpreter.cpp; sourceTree = "<group>"; };
+		CC2F12C22550F6FE006CCA85 /* Interpreter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Interpreter.h; sourceTree = "<group>"; };
+		CC2F12D5255105CD006CCA85 /* Tuple.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tuple.cpp; sourceTree = "<group>"; };
+		CC2F12D6255105CD006CCA85 /* Tuple.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tuple.h; sourceTree = "<group>"; };
 		CC916756251078EF005D800D /* Lab 1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Lab 1"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC916759251078EF005D800D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CC91676025107A35005D800D /* Token.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Token.cpp; sourceTree = "<group>"; };
@@ -98,6 +113,16 @@
 				CCE5C500252EE9B6006839BE /* Rules.cpp */,
 				CCE5C505252EE9C7006839BE /* Parameter.h */,
 				CCE5C504252EE9C7006839BE /* Parameter.cpp */,
+				CC2F12A92550ED21006CCA85 /* Database.h */,
+				CC2F12A82550ED21006CCA85 /* Database.cpp */,
+				CC2F12AD2550ED37006CCA85 /* Relation.h */,
+				CC2F12AC2550ED37006CCA85 /* Relation.cpp */,
+				CC2F12D6255105CD006CCA85 /* Tuple.h */,
+				CC2F12D5255105CD006CCA85 /* Tuple.cpp */,
+				CC2F12B12550ED3D006CCA85 /* Header.h */,
+				CC2F12B02550ED3D006CCA85 /* Header.cpp */,
+				CC2F12C22550F6FE006CCA85 /* Interpreter.h */,
+				CC2F12C12550F6FE006CCA85 /* Interpreter.cpp */,
 			);
 			path = "Lab 1";
 			sourceTree = "<group>";
@@ -159,14 +184,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC2F12B22550ED3D006CCA85 /* Header.cpp in Sources */,
 				CC91676525107A59005D800D /* Lexer.cpp in Sources */,
+				CC2F12D7255105CD006CCA85 /* Tuple.cpp in Sources */,
 				CCE5C506252EE9C7006839BE /* Parameter.cpp in Sources */,
 				CCE5C502252EE9B6006839BE /* Rules.cpp in Sources */,
 				CCE5C4FA252EE989006839BE /* DatalogProgram.cpp in Sources */,
 				CC91676825107A73005D800D /* Tokenizer.cpp in Sources */,
+				CC2F12AE2550ED37006CCA85 /* Relation.cpp in Sources */,
 				CC91675A251078EF005D800D /* main.cpp in Sources */,
 				CCEC640F252C4147006064DC /* Parser.cpp in Sources */,
 				CC91676225107A35005D800D /* Token.cpp in Sources */,
+				CC2F12AA2550ED21006CCA85 /* Database.cpp in Sources */,
+				CC2F12C32550F6FE006CCA85 /* Interpreter.cpp in Sources */,
 				CCE5C4FE252EE9B0006839BE /* Predicate.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

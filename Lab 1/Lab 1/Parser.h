@@ -30,7 +30,7 @@ public:
     bool Expression(int &index);
     bool Operator(int &index);
     
-    void ReturnFailure(ofstream &outFile);
+    void ReturnFailure();
     int CalculateContainerIndex();
     
 private:

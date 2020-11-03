@@ -5,49 +5,60 @@
 #include "Token.h"
 #include "Lexer.h"
 #include "Parser.h"
+#include "Database.h"
 #include "Tokenizer.h"
+#include "Interpreter.h"
 
 using namespace std;
 
 int main(int argc, const char * argv[]) {
     
-#ifdef DEBUG
-    vector <string> twoEightyFiles = {"input0.txt","input1.txt", "input2.txt"};
+
+    vector <string> inFiles = {"input0.txt","input1.txt", "input2.txt"};
     //"input0.txt","input1.txt", "input2.txt", "input3.txt", "input4.txt", "input5.txt", "input6.txt", "input7.txt", "input8.txt"
-    vector <string> outTwoEightyFiles = {"out0.txt", "out1.txt", "out2.txt"};
-    //"out0.txt", "out1.txt", "out2.txt", "out3.txt", "out4.txt", "out5.txt", "out6.txt", "out7.txt", "out8.txt"
     
-    for(unsigned int i = 0; i < twoEightyFiles.size(); i++) {
-        ofstream outFile (outTwoEightyFiles[i]);
-        Lexer lexer(twoEightyFiles[i], outFile);
+    
+    
+    
+#ifdef DEBUG
+    Lexer lexer(argv[1]);
+    DatalogProgram datalogProgram;
+    Parser parser(lexer.GetTokens(), datalogProgram);
+    if(parser.Parse()) {
+        cout << "Success!" << endl;
+        datalogProgram.ToString();
+    } else {
+        cout << "Failure!" << endl;
+        parser.ReturnFailure();
+    }
+#endif
+    
+    
+#ifndef DEBUG
+    for(int i = 0; i < inFiles.size(); i++) {
+        Lexer lexer(inFiles[i]);
+        
+        
         DatalogProgram datalogProgram;
+        Database database;
         Parser parser(lexer.GetTokens(), datalogProgram);
+        
+        
         if(parser.Parse()) {
-            //cout << "Success!" << endl;
-            outFile << "Success!" << endl;
-            datalogProgram.ToString(outFile);
-
-            cout << endl << endl;
-
+            
+            Interpreter interpreter(datalogProgram, database);
+            cout << endl << endl << endl << "Calling datalogProgram ToString..." << endl;
+            cout << "Success!" << endl;
+            datalogProgram.ToString();
         } else {
-            //cout << "Failure!" << endl;
-            outFile <<"Failure!" << endl;
-            parser.ReturnFailure(outFile);
+            cout << "Failure!" << endl;
+            //Interpreter interpreter(datalogProgram, database);
+
+            parser.ReturnFailure();
         }
     }
 #endif
     
-    ofstream outFile (argv[2]);
-    Lexer lexer(argv[1], outFile);
-    DatalogProgram datalogProgram;
-    Parser parser(lexer.GetTokens(), datalogProgram);
-    if(parser.Parse()) {
-        outFile << "Success!" << endl;
-        datalogProgram.ToString(outFile);
-    } else {
-        outFile << "Failure!" << endl;
-        parser.ReturnFailure(outFile);
-    }
 
     
     return 0;

@@ -14,9 +14,9 @@ class Token {
 public:
     
     Token();
-    Token(int tokenID, string value, int line, ofstream &outFile);
+    Token(int tokenID, string value, int line);
     
-    void Print(ofstream &outFile);
+    void Print();
     void EnumToString(int enumValue);
     
     string GetID();

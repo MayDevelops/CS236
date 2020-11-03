@@ -3,19 +3,15 @@
 Token::Token(){
     //default constructor
 }
-Token::Token(int tokenID, string value, int line, ofstream &outFile){
+Token::Token(int tokenID, string value, int line){
     stringValue = value;
     lineNumber = line;
     EnumToString(tokenID);
     //Print(outFile);
 }
 
-void Token::Print(ofstream &outFile) {
-    
+void Token::Print() {
     cout << "  (" << enumString << ",\"" << stringValue << "\"," << lineNumber << ")" << endl;
-    
-    outFile << "  (" << enumString << ",\"" << stringValue << "\"," << lineNumber << ")" << endl;
-    
 }
 
 void Token::EnumToString(int enumValue) {

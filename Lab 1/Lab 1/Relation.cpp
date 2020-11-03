@@ -8,9 +8,12 @@
 
 #include "Relation.h"
 
-Relation::Relation(string s, Header h) {
+Relation::Relation(string s, vector <Parameter*> sc) {
     nameOfRelation = s;
-    header = h;
+    
+    for(int i = 0; i < sc.size(); i++) {
+        header.AddColumns(sc[i]->GetParameter());
+    }
 }
 
 void Relation::ToString() {

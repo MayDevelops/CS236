@@ -25,7 +25,6 @@ public:
 private:
     DatalogProgram* dlp;
     Database* db;
-    Header tempHeader;
 };
 
 

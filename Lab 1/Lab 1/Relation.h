@@ -23,7 +23,7 @@ using namespace std;
 class Relation {
 public:
     
-    Relation(string s, Header h);
+    Relation(string s, vector <Parameter*> sc);
     
     void ToString();
     string GetRelationName();

@@ -21,13 +21,9 @@ void Interpreter::PopulateRelations() {
     
     cout << endl << "Inside PopulateRelations..." << endl;
     
-    for(vector<Predicate*>::iterator predIT = dlp->schemes.begin(); predIT != dlp->schemes.end(); predIT++) {
-        for (vector<Parameter*>::iterator paramIT1 = (*predIT)->parameters.begin(); paramIT1 != (*predIT)->parameters.end(); paramIT1++) {
-            tempHeader.AddColumns((*paramIT1)->GetParameter());
-        }
-        Relation relation((*predIT)->GetID(), tempHeader);
+    for(int i = 0; i < dlp->schemes.size(); i++) {
         cout << "Creating Relation object..." << endl;
-        
+        Relation relation(dlp->schemes[i]->GetID(), dlp->schemes[i]->parameters);
         cout << "Adding relation object to DB Map..." << endl;
         db->AddToMap(relation.GetRelationName(), relation);
         
@@ -56,7 +52,7 @@ void Interpreter::PopulateRelations() {
         cout << "Calling Relation ToString..." << endl;
         relation.ToString();
         
-    } //end first for
+    }
 }
 
 

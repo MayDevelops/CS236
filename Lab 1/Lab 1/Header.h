@@ -21,7 +21,7 @@ public:
     void AddColumns(string s);
   
 
-    vector <string> namesOfColumns;
+    vector <string> attributes;
 };
 
 #endif

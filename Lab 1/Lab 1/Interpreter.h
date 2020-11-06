@@ -21,7 +21,8 @@ public:
     Interpreter(DatalogProgram &datalogProgram, Database &database);
     
     void PopulateRelations();
-    
+    void EvaluateQueries();
+    Relation EvaluatePredicate(Predicate* p);
 private:
     DatalogProgram* dlp;
     Database* db;

@@ -9,5 +9,5 @@
 #include "Header.h"
 
 void Header::AddColumns(string s){
-    namesOfColumns.push_back(s);
+    attributes.push_back(s);
 }

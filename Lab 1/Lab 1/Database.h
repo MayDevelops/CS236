@@ -14,11 +14,11 @@
 class Database {
     
 public:
-    void AddToMap(string s, Relation relation);
+    void AddToMap(string s, Relation* relation);
     
     
 
-    map <string, Relation> database;
+    map <string, Relation*> database;
     
 };
 

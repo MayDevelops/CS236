@@ -12,8 +12,11 @@ void Tuple::AddTuple(string s) {
     values.push_back(s);
 }
 
-void Tuple::ToString() {
+string Tuple::ToString() {
+    string returnString = "";
     for(int i = 0; i < values.size(); i++) {
-        cout << values[i];
+        returnString += values[i];
     }
+    
+    return returnString;
 }

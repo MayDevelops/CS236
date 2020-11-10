@@ -12,8 +12,19 @@ void Tuple::AddTuple(string s) {
     values.push_back(s);
 }
 
-void Tuple::ToString() {
-    for(int i = 0; i < values.size(); i++) {
-        cout << values[i];
+string Tuple::ToString(vector<string> header) {
+    string s = "";
+    int counter = 0;
+    for (int i = 0; i < header.size(); i++) {
+        s += header[i] + "=";
+        
+        if (i == header.size() - 1) {
+            s += values[i] + "\n";
+        } else {
+            s += values[i] + ", ";
+        }
+        counter++;
     }
+    
+    return s;
 }

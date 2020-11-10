@@ -22,8 +22,8 @@ void Predicate::AddParameter(string s) {
 string Predicate::ToString() {
     if(tokenClassification == 's') {
         ss.str("");
-        
-        ss << "  ";
+    
+        ss << "";
         ss << ID;
         ss << "(";
         for(unsigned int i = 0; i < parameters.size(); i++) {
@@ -46,7 +46,7 @@ string Predicate::ToString() {
     } else if (tokenClassification == 'f') {
         ss.str("");
         
-        ss << "  ";
+        ss << "";
         ss << ID;
         ss << "(";
         for(unsigned int i = 0; i < parameters.size(); i++) {
@@ -70,7 +70,7 @@ string Predicate::ToString() {
     } else {
         ss.str("");
         
-        ss << "  ";
+        ss << "";
         ss << ID;
         ss << "(";
         for(unsigned int i = 0; i < parameters.size(); i++) {

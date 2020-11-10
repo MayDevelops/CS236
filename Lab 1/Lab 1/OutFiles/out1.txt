@@ -1,2 +1,9 @@
-Failure!
-  (PERIOD,".",37)
+SK(A,'c')? Yes(2)
+  A='a'
+  A='b'
+SK('b','c')? Yes(1)
+SK('c','c')? No
+SK(A,B)? Yes(3)
+  A='a', B='c'
+  A='b', B='c'
+  A='a', B='b'

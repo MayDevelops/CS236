@@ -19,9 +19,9 @@ class Header {
 public:
     
     void AddColumns(string s);
-  
-
-    vector <string> namesOfColumns;
+    
+    
+    vector <string> columns;
 };
 
 #endif

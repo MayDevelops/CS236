@@ -7,3 +7,4 @@ Parameter::Parameter(string s) {
 string Parameter::GetParameter() {
     return parameter;
 }
+

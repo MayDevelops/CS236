@@ -14,7 +14,7 @@ using namespace std;
 int main(int argc, const char * argv[]) {
     
 
-    vector <string> inFiles = {"input0.txt"};
+    vector <string> inFiles = {"input2.txt"};
     //"input0.txt","input1.txt", "input2.txt", "input3.txt", "input4.txt", "input5.txt", "input6.txt", "input7.txt", "input8.txt"
     
     
@@ -23,12 +23,12 @@ int main(int argc, const char * argv[]) {
 #ifdef DEBUG
     Lexer lexer(argv[1]);
     DatalogProgram datalogProgram;
+    Database database;
     Parser parser(lexer.GetTokens(), datalogProgram);
     if(parser.Parse()) {
-        cout << "Success!" << endl;
-        datalogProgram.ToString();
+        
+        Interpreter interpreter(datalogProgram, database);
     } else {
-        cout << "Failure!" << endl;
         parser.ReturnFailure();
     }
 #endif
@@ -47,11 +47,12 @@ int main(int argc, const char * argv[]) {
         if(parser.Parse()) {
             
             Interpreter interpreter(datalogProgram, database);
-            cout << endl << endl << endl << "Calling datalogProgram ToString..." << endl;
-            cout << "Success!" << endl;
-            datalogProgram.ToString();
+            //cout << endl << endl << endl << "Calling datalogProgram ToString..." << endl;
+            //cout << "Success!" << endl;
+            
+            cout << "-------------------------------------" << endl;
         } else {
-            cout << "Failure!" << endl;
+            //cout << "Failure!" << endl;
             //Interpreter interpreter(datalogProgram, database);
 
             parser.ReturnFailure();

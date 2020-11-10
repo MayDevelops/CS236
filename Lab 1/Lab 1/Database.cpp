@@ -9,5 +9,5 @@
 #include "Database.h"
 
 void Database::AddToMap(string s, Relation relation) {
-    database.insert ( pair <string, Relation> (s,relation) );
+    database.insert({s,relation});
 }

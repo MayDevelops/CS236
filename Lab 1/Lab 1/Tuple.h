@@ -19,7 +19,7 @@ using namespace std;
 class Tuple : public vector <string> {
 public:
     void AddTuple(string s);
-    string ToString();
+    string ToString(vector<string> header);
     
     vector <string> values;
     

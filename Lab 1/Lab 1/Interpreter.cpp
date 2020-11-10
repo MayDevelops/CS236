@@ -19,101 +19,90 @@ Interpreter::Interpreter(DatalogProgram &datalogProgram, Database &database){
 
 void Interpreter::PopulateRelations() {
     
-    cout << endl << "Inside PopulateRelations..." << endl;
+    //cout << endl << "Inside PopulateRelations..." << endl;
     
     for(int i = 0; i < dlp->schemes.size(); i++) {
-        cout << "Creating Relation object..." << endl;
-        Relation* relation = new Relation(dlp->schemes[i]->GetID(), dlp->schemes[i]->parameters);
-        cout << "Adding relation object to DB Map..." << endl;
-        db->AddToMap(relation->GetRelationName(), relation);
+        //cout << "Creating Relation object..." << endl;
+        Relation relation(dlp->schemes[i]->GetID(), dlp->schemes[i]->parameters);
+        db->AddToMap(relation.GetRelationName(), relation);
         
         //Facts
-        for(vector <Predicate*>::iterator factsIT = dlp->facts.begin(); factsIT != dlp->facts.end(); factsIT++) {
-            Tuple t;
-            for(vector<Parameter*>::iterator paramIT = (*factsIT)->parameters.begin(); paramIT != (*factsIT)->parameters.end(); paramIT++) {
-                t.AddTuple((*paramIT)->GetParameter());
+        for (int j = 0; j < dlp->facts.size(); j++) {
+            Tuple* t = new Tuple;
+            for (int k = 0; k < dlp->facts[j]->parameters.size(); k++) {
+                t->AddTuple(dlp->facts[j]->parameters[k]->GetParameter());
             }
-            for(map <string, Relation*>::iterator mapIT = db->database.begin(); mapIT != db->database.end(); mapIT++) {
-                if((*mapIT).first == (*factsIT)->GetID()) {
-                    Relation* rel = db->database[(*factsIT)->GetID()];
-                    rel->AddTuple(t);
+            for (map<string,Relation>::iterator it = db->database.begin(); it != db->database.end(); it++) {
+                if (dlp->facts[i]->GetID() == (*it).first) {
+                    db->database.at(dlp->facts[j]->GetID()).AddTuple(t);
                 }
             }
         }
-//        cout << "Calling Relation ToString..." << endl;
-//        relation->ToString();
-//
     }
+    
+    //cout << db->toString();
+    EvaluateQueries();
 }
+
 
 void Interpreter::EvaluateQueries() {
-    for (vector<Predicate*>::iterator it2 = dlp->queries.begin(); it2 != dlp->queries.end(); it2++) {
-        Relation r = EvaluatePredicate((*it2));
+    map<string,int> theMap;
+    for(int i = 0; i < dlp->queries.size(); i++) {
+        //Get Querie Name
+        string qName = dlp->queries[i]->GetID();
         
-        string out = (*it2)->ToString() + " ";
-        int size = 0;
-        for (set<Tuple>::iterator it = r.tuples.begin(); it != r.tuples.end(); it++) {
-            size++;
-        }
-        if (size == 0) {
-            out += "No\n";
-        } else {
-            out += "yes(" + to_string(size) + ")\n";
-        }
-        
-        bool allConst = true;
-        for (vector <Parameter*>::iterator it3 = (*it2)->parameters.begin(); it3 != (*it2)->parameters.end(); it3++) {
-            if ((*it3)->isConstant() != true) {
-                allConst = false;
-                break;
+        //Loop through map and find the relation that matches
+        for(map<string, Relation>::iterator it = db->database.begin(); it != db->database.end(); it++) {
+            //Search through the map and find the one with the matching relation name
+            if(qName == (*it).first) {
+                Relation temp = (*it).second;
+                Relation t = temp;
+                vector <int> indexes;
+                vector <string> seentIt;
+                
+                //Select,Project,Rename
+                for(int j = 0; j < dlp->queries[i]->parameters.size(); j++) {
+                    string parameter = dlp->queries[i]->parameters[j]->GetParameter();
+                    
+                    //This checks to see if it is a constant or not.
+                    if (parameter[0] == '\'') {
+                        t = t.Select1(j, parameter);
+                        
+                    } else {
+                        theMap.insert(pair<string,int>(parameter,j));
+                        //Select2
+                        bool hasSeenIt = true;
+                        for (int k = 0; k < seentIt.size(); k++) {
+                            if (seentIt[k] == parameter) {
+                                hasSeenIt = false;
+                                for (map<string,int>::iterator mapIT = theMap.begin(); mapIT != theMap.end(); mapIT++) {
+                                    if((*mapIT).first == parameter) {
+                                        t = t.Select2((*mapIT).second,j);
+                                    }
+                                }
+                            }
+                        }
+                        if (hasSeenIt) { seentIt.push_back(parameter); }
+                        t = t.Rename(j, parameter);
+                        indexes.push_back(j);
+                    }
+                }
+                //project
+                t = t.Project(indexes);
+                cout << dlp->queries[i]->ToString();
+                cout << " ";
+                if (t.tuples.size() > 0) {
+                    cout << "Yes(" << t.tuples.size() << ")";
+                    cout << endl;
+                    cout << t.ToString();
+                } else {
+                    cout << "No" << endl;
+                }
+                
             }
         }
-        
-        if (!allConst) {
-            out += r.ToString();
-        }
-        cout << out;
     }
 }
 
-Relation Interpreter::EvaluatePredicate(Predicate* p) {
-    Relation rel = *(db->database[p->GetID()]);
-    map<int,string> vm;
-    int i = 0;
-    int j = 0;
-    
-    for(vector <Parameter*>::iterator it = p->parameters.begin(); it != p->parameters.end(); it++) {
-        if ((*it)->isConstant() == true) {
-            rel = *(rel.select1(&rel, i, (*it)->GetParameter()));
-        } else {
-            bool seenIt = false;
-            for (map<int,string>::iterator it3 = vm.begin(); it3 != vm.end(); it3++) {
-                if ((it3)->second == (*it)->GetParameter()) {
-                    seenIt = true;
-                    j = (*it3).first;
-                    break;
-                }
-            }
-            
-            if (!seenIt) {
-                vm.insert(pair<int, string>(i, (*it)->GetParameter()));
-            } else {
-                rel = *(rel.select2(&rel, i, j));
-            }
-        }
-        i++;
-    }
-    
-    vector<int> pos;
-    vector<string> newHeaderVals;
-    for (map<int, string>::iterator it = vm.begin(); it != vm.end(); it++) {
-        pos.push_back((*it).first);
-        newHeaderVals.push_back((*it).second);
-    }
-    rel = *(rel.project(&rel, pos));
-    rel = *(rel.rename(&rel, newHeaderVals));
-    
-    return rel;
-}
 
 

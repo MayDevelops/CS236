@@ -12,11 +12,19 @@ void Tuple::AddTuple(string s) {
     values.push_back(s);
 }
 
-string Tuple::ToString() {
-    string returnString = "";
-    for(int i = 0; i < values.size(); i++) {
-        returnString += values[i];
+string Tuple::ToString(vector<string> header) {
+    string s = "";
+    int counter = 0;
+    for (int i = 0; i < header.size(); i++) {
+        s += header[i] + "=";
+        
+        if (i == header.size() - 1) {
+            s += values[i] + "\n";
+        } else {
+            s += values[i] + ", ";
+        }
+        counter++;
     }
     
-    return returnString;
+    return s;
 }

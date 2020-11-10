@@ -22,21 +22,21 @@ using namespace std;
 
 class Relation {
 public:
-    
+    Relation();
     Relation(string s, vector <Parameter*> sc);
     
     string ToString();
     string GetRelationName();
-    void AddTuple(Tuple t);
-    Relation* project(Relation* rel, vector<int> pos);
-    Relation* rename(Relation* rel, vector<string> newHeader);
-    Relation* select2(Relation* rel, int index1, int index2);
-    Relation* select1(Relation* rel, int index, string value);
+    void AddTuple(Tuple* t);
+    Relation Select1(int index, string value);
+    Relation Select2(int index1, int index2);
+    Relation Rename(int index, string value);
+    Relation Project(vector <int> index);
     
     
     string nameOfRelation = "";
     Header header;
-    set <Tuple> tuples;
+    set <Tuple*> tuples;
    
     
     

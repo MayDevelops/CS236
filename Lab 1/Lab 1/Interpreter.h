@@ -22,7 +22,7 @@ public:
     
     void PopulateRelations();
     void EvaluateQueries();
-    Relation EvaluatePredicate(Predicate* p);
+    
 private:
     DatalogProgram* dlp;
     Database* db;

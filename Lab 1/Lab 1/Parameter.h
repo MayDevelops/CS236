@@ -13,7 +13,6 @@ class Parameter {
 public:
     Parameter(string s);
     string GetParameter();
-    
 private:
     
     string parameter;

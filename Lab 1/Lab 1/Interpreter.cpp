@@ -21,19 +21,19 @@ void Interpreter::PopulateRelations() {
     
     //cout << endl << "Inside PopulateRelations..." << endl;
     
-    for(int i = 0; i < dlp->schemes.size(); i++) {
+    for(unsigned int i = 0; i < dlp->schemes.size(); i++) {
         //cout << "Creating Relation object..." << endl;
         Relation relation(dlp->schemes[i]->GetID(), dlp->schemes[i]->parameters);
         db->AddToMap(relation.GetRelationName(), relation);
         
         //Facts
-        for (int j = 0; j < dlp->facts.size(); j++) {
-            Tuple* t = new Tuple;
-            for (int k = 0; k < dlp->facts[j]->parameters.size(); k++) {
-                t->AddTuple(dlp->facts[j]->parameters[k]->GetParameter());
+        for (unsigned int j = 0; j < dlp->facts.size(); j++) {
+            Tuple t;
+            for (unsigned int k = 0; k < dlp->facts[j]->parameters.size(); k++) {
+                t.AddTuple(dlp->facts[j]->parameters[k]->GetParameter());
             }
             for (map<string,Relation>::iterator it = db->database.begin(); it != db->database.end(); it++) {
-                if (dlp->facts[i]->GetID() == (*it).first) {
+                if (dlp->facts[j]->GetID() == (*it).first) {
                     db->database.at(dlp->facts[j]->GetID()).AddTuple(t);
                 }
             }
@@ -46,8 +46,8 @@ void Interpreter::PopulateRelations() {
 
 
 void Interpreter::EvaluateQueries() {
-    map<string,int> theMap;
-    for(int i = 0; i < dlp->queries.size(); i++) {
+    map<string,unsigned int> theMap;
+    for(unsigned int i = 0; i < dlp->queries.size(); i++) {
         //Get Querie Name
         string qName = dlp->queries[i]->GetID();
         
@@ -57,11 +57,11 @@ void Interpreter::EvaluateQueries() {
             if(qName == (*it).first) {
                 Relation temp = (*it).second;
                 Relation t = temp;
-                vector <int> indexes;
+                vector <unsigned int> indexes;
                 vector <string> seentIt;
                 
                 //Select,Project,Rename
-                for(int j = 0; j < dlp->queries[i]->parameters.size(); j++) {
+                for(unsigned int j = 0; j < dlp->queries[i]->parameters.size(); j++) {
                     string parameter = dlp->queries[i]->parameters[j]->GetParameter();
                     
                     //This checks to see if it is a constant or not.
@@ -69,22 +69,25 @@ void Interpreter::EvaluateQueries() {
                         t = t.Select1(j, parameter);
                         
                     } else {
-                        theMap.insert(pair<string,int>(parameter,j));
+                        theMap.insert(pair<string,unsigned int>(parameter,j));
                         //Select2
                         bool hasSeenIt = true;
-                        for (int k = 0; k < seentIt.size(); k++) {
+                        for (unsigned int k = 0; k < seentIt.size(); k++) {
                             if (seentIt[k] == parameter) {
                                 hasSeenIt = false;
-                                for (map<string,int>::iterator mapIT = theMap.begin(); mapIT != theMap.end(); mapIT++) {
+                                for (map<string,unsigned int>::iterator mapIT = theMap.begin(); mapIT != theMap.end(); mapIT++) {
                                     if((*mapIT).first == parameter) {
                                         t = t.Select2((*mapIT).second,j);
                                     }
                                 }
                             }
                         }
-                        if (hasSeenIt) { seentIt.push_back(parameter); }
+                        if (hasSeenIt) {
+                            seentIt.push_back(parameter);
+                            indexes.push_back(j);
+                        }
                         t = t.Rename(j, parameter);
-                        indexes.push_back(j);
+                        
                     }
                 }
                 //project

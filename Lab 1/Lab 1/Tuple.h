@@ -16,14 +16,16 @@
 
 using namespace std;
 
-class Tuple : public vector <string> {
+class Tuple  {
 public:
+    bool operator< (const Tuple& other) const {
+        return this->values < other.values;
+    }
     void AddTuple(string s);
     string ToString(vector<string> header);
     
     vector <string> values;
     
 };
-
 
 #endif

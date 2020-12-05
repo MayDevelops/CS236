@@ -14,7 +14,7 @@ using namespace std;
 int main(int argc, const char * argv[]) {
     
 
-    vector <string> inFiles = {"input2.txt"};
+    vector <string> inFiles = {"input0.txt"};
     //"input0.txt","input1.txt", "input2.txt", "input3.txt", "input4.txt", "input5.txt", "input6.txt", "input7.txt", "input8.txt"
     
     

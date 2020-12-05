@@ -15,7 +15,7 @@ void Tuple::AddTuple(string s) {
 string Tuple::ToString(vector<string> header) {
     string s = "";
     int counter = 0;
-    for (int i = 0; i < header.size(); i++) {
+    for (unsigned int i = 0; i < header.size(); i++) {
         s += header[i] + "=";
         
         if (i == header.size() - 1) {

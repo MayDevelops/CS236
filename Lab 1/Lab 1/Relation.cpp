@@ -14,31 +14,40 @@ Relation::Relation() {
 Relation::Relation(string s, vector <Parameter*> sc) {
     nameOfRelation = s;
     
-    for(int i = 0; i < sc.size(); i++) {
+    for(unsigned int i = 0; i < sc.size(); i++) {
         header.AddColumns(sc[i]->GetParameter());
     }
 }
 
 string Relation::ToString() {
-    string s = "";
-    for (set<Tuple*>::iterator setIT = tuples.begin(); setIT != tuples.end(); setIT++) {
+    ostringstream s;
+    s << "";
+    for (set<Tuple>::iterator setIT = tuples.begin(); setIT != tuples.end(); setIT++) {
         if(header.columns.size() == 0) {
             
         } else {
-            s += "  ";
-            s += (*setIT)->ToString(header.columns);
+            s << "  ";
+            for(unsigned int i = 0; i < header.columns.size(); i++) {
+                s << header.columns[i] << "=";
+                s << (*setIT).values[i];
+                if(i == header.columns.size() - 1) {
+                    s << "\n";
+                } else {
+                    s << ", ";
+                }
+            }
         }
     }
-    
-    return s;
+    return s.str();
 }
 
 string Relation::GetRelationName() {
     return nameOfRelation;
 }
 
-void Relation::AddTuple(Tuple* t) {
+void Relation::AddTuple(Tuple t) {
     tuples.insert(t);
+    
 }
 
 
@@ -47,8 +56,8 @@ Relation Relation::Select1(int index, string value){
     Relation temp;
     temp.header = header;
     temp.nameOfRelation = nameOfRelation;
-    for (set<Tuple*>::iterator it = tuples.begin(); it != tuples.end(); it++) {
-        if ((*it)->values[index] == value) {
+    for (set<Tuple>::iterator it = tuples.begin(); it != tuples.end(); it++) {
+        if ((*it).values[index] == value) {
             temp.AddTuple((*it));
         }
     }
@@ -59,8 +68,8 @@ Relation Relation::Select2(int index1, int index2) {
     Relation temp;
     temp.header = header;
     temp.nameOfRelation = nameOfRelation;
-    for (set<Tuple*>::iterator it = tuples.begin(); it != tuples.end(); it++) {
-        if ((*it)->values[index1] == (*it)->values[index2]) {
+    for (set<Tuple>::iterator it = tuples.begin(); it != tuples.end(); it++) {
+        if ((*it).values[index1] == (*it).values[index2]) {
             temp.AddTuple((*it));
         }
     }
@@ -79,14 +88,14 @@ Relation Relation::Rename(int index, string value) {
     return temp;
 }
 
-Relation Relation::Project(vector <int> indexes) {
+Relation Relation::Project(vector <unsigned int> indexes) {
     Relation temp;
     temp.nameOfRelation = nameOfRelation;
     
     //Takes care of the header
     Header tempH;
-    for (int i = 0; i < header.columns.size(); i++) {
-        for(int j = 0; j < indexes.size(); j++) {
+    for (unsigned int i = 0; i < header.columns.size(); i++) {
+        for(unsigned int j = 0; j < indexes.size(); j++) {
             if (indexes[j] == i) {
                 tempH.AddColumns(header.columns[i]);
             }
@@ -96,12 +105,12 @@ Relation Relation::Project(vector <int> indexes) {
     temp.header = tempH;
     
     //Taking care of the tuples
-    for (set<Tuple*>::iterator it = tuples.begin(); it != tuples.end(); it++) {
-        Tuple* tempT = new Tuple;
-        for (int i = 0; i < (*it)->values.size(); i++) {
-            for (int j = 0; j < indexes.size(); j++) {
+    for (set<Tuple>::iterator it = tuples.begin(); it != tuples.end(); it++) {
+        Tuple tempT;
+        for (unsigned int i = 0; i < (*it).values.size(); i++) {
+            for (unsigned int j = 0; j < indexes.size(); j++) {
                 if (indexes[j] == i) {
-                    tempT->AddTuple((*it)->values[i]);
+                    tempT.AddTuple((*it).values[i]);
                 }
             }
         }

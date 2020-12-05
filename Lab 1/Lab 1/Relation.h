@@ -17,29 +17,26 @@
 #include "Tuple.h"
 #include "Header.h"
 
-
 using namespace std;
 
 class Relation {
 public:
+    
     Relation();
     Relation(string s, vector <Parameter*> sc);
     
     string ToString();
     string GetRelationName();
-    void AddTuple(Tuple* t);
+    void AddTuple(Tuple t);
     Relation Select1(int index, string value);
     Relation Select2(int index1, int index2);
     Relation Rename(int index, string value);
-    Relation Project(vector <int> index);
+    Relation Project(vector <unsigned int> index);
     
     
     string nameOfRelation = "";
     Header header;
-    set <Tuple*> tuples;
-   
-    
-    
+    set <Tuple> tuples; 
 };
 
 #endif

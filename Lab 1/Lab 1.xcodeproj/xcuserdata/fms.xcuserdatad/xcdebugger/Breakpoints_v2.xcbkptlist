@@ -7,32 +7,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B3E1B859-264C-4D04-8FDD-EC940C04AC78"
+            uuid = "EDC38D85-F79E-4939-919C-9D4F128B2D59"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Lab 1/Parser.cpp"
+            filePath = "Lab 1/Interpreter.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "Parser::HeadPredicate(index)"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "Interpreter::EvaluateQueries()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "19B4AE7B-3398-4E64-94D8-4B3FEB5A1B33"
+            uuid = "4BE2F965-5049-4180-A6DC-70C33576D885"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Lab 1/Rules.cpp"
+            filePath = "Lab 1/Interpreter.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "Rules::ToString()"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "Interpreter::EvaluateQueries()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5139E55A-FDB6-41E0-8134-D94C60F133BC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Lab 1/Interpreter.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "Interpreter::EvaluateQueries()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

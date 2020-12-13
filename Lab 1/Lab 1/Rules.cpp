@@ -9,7 +9,6 @@ Rules::Rules(Predicate *head, vector <Predicate*> inBody) {
 string Rules::ToString() {
     buildS.str("");
     
-    buildS << "  ";
     buildS << headPred->GetID();
     buildS << "(";
     buildS << headPred->GetParameters();

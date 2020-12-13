@@ -16,6 +16,9 @@ string Tuple::ToString(vector<string> header) {
     string s = "";
     int counter = 0;
     for (unsigned int i = 0; i < header.size(); i++) {
+        if(i == 0) {
+            s += "  ";
+        }
         s += header[i] + "=";
         
         if (i == header.size() - 1) {

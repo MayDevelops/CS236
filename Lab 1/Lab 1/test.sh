@@ -8,6 +8,7 @@ echo -e "\033[1;0m"
 ./Lab4 4-80/input0.txt > OutFiles/out0.txt
 diff 4-80/answer0.txt OutFiles/out0.txt
 
+
 echo -e "\033[1;31m File1:"
 echo -e "\033[1;0m"
 ./Lab4 4-80/input1.txt > OutFiles/out1.txt
@@ -28,6 +29,7 @@ echo -e "\033[1;0m"
 ./Lab4 4-80/input4.txt > OutFiles/out4.txt
 diff 4-80/answer4.txt OutFiles/out4.txt
 
+<<COMMENT
 echo -e "\033[1;31m File5:"
 echo -e "\033[1;0m"
 ./Lab4 4-80/input5.txt > OutFiles/out5.txt
@@ -41,7 +43,7 @@ diff 4-80/answer6.txt OutFiles/out6.txt
 echo -e "\033[1;31m File7:"
 echo -e "\033[1;0m"
 ./Lab4 4-80/input7.txt > OutFiles/out7.txt
-diff 4/answer7.txt OutFiles/out7.txt
+diff 4-80/answer7.txt OutFiles/out7.txt
 
 
 
@@ -81,5 +83,7 @@ echo -e "\033[1;0m"
 ./Lab3 4-100/input8.txt > OutFiles/out08.txt
 diff 4-100/answer8.txt OutFiles/out08.txt
 echo -e "\033[1;32m Testing Complete!"
+
+COMMENT
 
 rm ./Lab4

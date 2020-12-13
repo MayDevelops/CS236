@@ -13,14 +13,62 @@ Interpreter::Interpreter(DatalogProgram &datalogProgram, Database &database){
     db = &database;
     
     PopulateRelations();
+    
+    // MARK: Test Code For Rules Lab
+    cout << "Rule Evaluation" << endl;
+    
+    int counter = 0;
+    
+    int start = db->GetCount();
+    int finish = 0;
+    bool loop = true;
+    do{
+        EvaluateRules();
+        counter++;
+        finish = db->GetCount();
+        
+        if(finish == start) {
+            loop = false;
+        } else {
+            start = finish;
+        }
+        
+
+    }while(loop);
+    cout << endl << "Schemes populated after " << counter << " passes through the Rules." << endl;
+    cout << endl << "Query Evaluation" << endl;
+    EvaluateQueries();
+}
+
+void Interpreter::EvaluateRules() {
+    for(int i = 0; i < dlp->rules.size(); i++) {
+        
+        cout << dlp->rules[i]->ToString() << endl;
+        Relation tempRelation = db->database.at(dlp->rules[i]->body[0]->GetID());
+        tempRelation.ChangeHeader(dlp->rules[i]->body[0]->parameters);
+        for(int z = 1; z < dlp->rules[i]->body.size(); z++) {
+            Relation tempRelation2 = db->database.at(dlp->rules[i]->body[z]->GetID());
+            tempRelation2.ChangeHeader(dlp->rules[i]->body[z]->parameters);
+            tempRelation = tempRelation.Join(tempRelation, tempRelation2);
+        }
+        
+        vector <unsigned int> indexes;
+        for(int j = 0; j < dlp->rules[i]->headPred->parameters.size(); j++) {
+            for(int k = 0; k < tempRelation.header.columns.size(); k++) {
+                if(dlp->rules[i]->headPred->parameters[j]->GetParameter() == tempRelation.header.columns[k]) {
+                    indexes.push_back(k);
+                }
+            }
+        }
+        tempRelation = tempRelation.Project(indexes);
+
+        db->database.at(dlp->rules[i]->headPred->ID).Union(tempRelation);
+   }
 }
 
 
-
 void Interpreter::PopulateRelations() {
-    
-    //cout << endl << "Inside PopulateRelations..." << endl;
-    
+
     for(unsigned int i = 0; i < dlp->schemes.size(); i++) {
         //cout << "Creating Relation object..." << endl;
         Relation relation(dlp->schemes[i]->GetID(), dlp->schemes[i]->parameters);
@@ -39,9 +87,6 @@ void Interpreter::PopulateRelations() {
             }
         }
     }
-    
-    //cout << db->toString();
-    EvaluateQueries();
 }
 
 
@@ -92,15 +137,16 @@ void Interpreter::EvaluateQueries() {
                 }
                 //project
                 t = t.Project(indexes);
-                cout << dlp->queries[i]->ToString();
-                cout << " ";
-                if (t.tuples.size() > 0) {
-                    cout << "Yes(" << t.tuples.size() << ")";
-                    cout << endl;
-                    cout << t.ToString();
-                } else {
-                    cout << "No" << endl;
-                }
+                // MARK: UNCOMMENT FOR LAB 3 OUTPUT
+                                cout << dlp->queries[i]->ToString();
+                                cout << " ";
+                                if (t.tuples.size() > 0) {
+                                    cout << "Yes(" << t.tuples.size() << ")";
+                                    cout << endl;
+                                    cout << t.ToString();
+                                } else {
+                                    cout << "No" << endl;
+                                }
                 
             }
         }

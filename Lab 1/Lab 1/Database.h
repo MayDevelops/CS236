@@ -3,14 +3,10 @@
 
 #include "Relation.h"
 
-
 #include <stdio.h>
 #include <map>
 #include <string>
 #include <sstream>
-
-
-
 
 class Database {
     
@@ -27,6 +23,20 @@ public:
         
         return os.str();
     }
+    
+    int GetCount() {
+        int count = 0;
+        for(map<string, Relation>::iterator it = database.begin(); it != database.end(); it++) {
+            count += it->second.tuples.size();
+        }
+        return count;
+    }
+    
+    
+    
+    
+    
+    
     map <string, Relation> database;
     
 };

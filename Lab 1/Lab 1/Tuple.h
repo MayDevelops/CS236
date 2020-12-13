@@ -24,6 +24,15 @@ public:
     void AddTuple(string s);
     string ToString(vector<string> header);
     
+    void PrintValues() {
+        for(int i = 0; i < values.size(); i++) {
+            cout << values[i] << " ";
+        }
+        cout << endl;
+    }
+    
+    
+    
     vector <string> values;
     
 };

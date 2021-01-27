@@ -1,5 +1,5 @@
 //
-//  Interpreter.cpp
+//  unsigned interpreter.cpp
 //  Lab 1
 //
 //  Created by JC May on 11/2/20.
@@ -17,10 +17,10 @@ Interpreter::Interpreter(DatalogProgram &datalogProgram, Database &database){
     // MARK: Test Code For Rules Lab
     cout << "Rule Evaluation" << endl;
     
-    int counter = 0;
+    unsigned int counter = 0;
     
-    int start = db->GetCount();
-    int finish = 0;
+    unsigned int start = db->GetCount();
+    unsigned int finish = 0;
     bool loop = true;
     do{
         EvaluateRules();
@@ -41,28 +41,48 @@ Interpreter::Interpreter(DatalogProgram &datalogProgram, Database &database){
 }
 
 void Interpreter::EvaluateRules() {
-    for(int i = 0; i < dlp->rules.size(); i++) {
+    for(unsigned int i = 0; i < dlp->rules.size(); i++) {
+        Rules* dlpRule = dlp->rules[i]; //To Increase Readability.
+        Predicate* dlpRHP = dlpRule->headPred; //To Increase Readabilituy
+        Predicate* dlpBody = dlpRule->body[0];
         
         cout << dlp->rules[i]->ToString() << endl;
-        Relation tempRelation = db->database.at(dlp->rules[i]->body[0]->GetID());
-        tempRelation.ChangeHeader(dlp->rules[i]->body[0]->parameters);
-        for(int z = 1; z < dlp->rules[i]->body.size(); z++) {
-            Relation tempRelation2 = db->database.at(dlp->rules[i]->body[z]->GetID());
-            tempRelation2.ChangeHeader(dlp->rules[i]->body[z]->parameters);
+        
+        Relation tempRelation = db->database.at(dlpBody->GetID());
+        
+        tempRelation.ChangeHeader(dlpBody->parameters);
+        
+        for(unsigned int z = 1; z < dlpRule->body.size(); z++) {
+            Predicate* dlpBodyz = dlpRule->body[z];
+            Relation tempRelation2 = db->database.at(dlpBodyz->GetID());
+            
+            tempRelation2.ChangeHeader(dlpBodyz->parameters);
             tempRelation = tempRelation.Join(tempRelation, tempRelation2);
         }
         
+        for(unsigned int y = 0; y < tempRelation.header.columns.size(); y++) {
+            if(tempRelation.header.columns[y].at(0) == '\'') {
+                tempRelation = tempRelation.Select1(y, tempRelation.header.columns[y]);
+            }
+        }
+        
+        
+        
+        
+        
         vector <unsigned int> indexes;
-        for(int j = 0; j < dlp->rules[i]->headPred->parameters.size(); j++) {
-            for(int k = 0; k < tempRelation.header.columns.size(); k++) {
-                if(dlp->rules[i]->headPred->parameters[j]->GetParameter() == tempRelation.header.columns[k]) {
+        
+        for(unsigned int j = 0; j < dlpRHP->parameters.size(); j++) {
+            for(unsigned int k = 0; k < tempRelation.header.columns.size(); k++) {
+                if(dlpRHP->parameters[j]->GetParameter() == tempRelation.header.columns[k]) {
                     indexes.push_back(k);
                 }
             }
         }
-        tempRelation = tempRelation.Project(indexes);
+        
+        tempRelation.Project1(indexes);
 
-        db->database.at(dlp->rules[i]->headPred->ID).Union(tempRelation);
+        db->database.at(dlpRule->headPred->ID).Union(tempRelation);
    }
 }
 
@@ -136,7 +156,7 @@ void Interpreter::EvaluateQueries() {
                     }
                 }
                 //project
-                t = t.Project(indexes);
+                t.Project1(indexes);
                 // MARK: UNCOMMENT FOR LAB 3 OUTPUT
                                 cout << dlp->queries[i]->ToString();
                                 cout << " ";

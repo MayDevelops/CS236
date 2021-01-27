@@ -24,8 +24,8 @@ public:
         return os.str();
     }
     
-    int GetCount() {
-        int count = 0;
+    unsigned int GetCount() {
+        unsigned int count = 0;
         for(map<string, Relation>::iterator it = database.begin(); it != database.end(); it++) {
             count += it->second.tuples.size();
         }

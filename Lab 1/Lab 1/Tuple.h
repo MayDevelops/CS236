@@ -25,7 +25,7 @@ public:
     string ToString(vector<string> header);
     
     void PrintValues() {
-        for(int i = 0; i < values.size(); i++) {
+        for(unsigned int i = 0; i < values.size(); i++) {
             cout << values[i] << " ";
         }
         cout << endl;

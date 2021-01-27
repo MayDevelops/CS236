@@ -13,6 +13,7 @@
 #include <set>
 #include <string>
 #include <map>
+#include <algorithm>
 
 
 #include "Predicate.h"
@@ -34,73 +35,48 @@ public:
     string ToString();
     string GetRelationName();
     void AddTuple(Tuple t);
-    Relation Select1(int index, string value);
-    Relation Select2(int index1, int index2);
-    Relation Rename(int index, string value);
+    Relation Select1(unsigned int index, string value);
+    Relation Select2(unsigned int index1, unsigned int index2);
+    Relation Rename(unsigned int index, string value);
     Relation Project(vector <unsigned int> index);
     
-    string GetHeaderColumns() {
-        string returnString = "";
-        for(int i = 0; i < header.columns.size(); i++) {
-            returnString += header.columns[i];
+
+    
+    void Project1(vector <unsigned int> pos) {
+        set <Tuple> newTuples;
+        vector <string> newAttributes;
+        
+        for(vector<unsigned int>::iterator it = pos.begin(); it != pos.end(); it++) {
+            newAttributes.push_back(this->header.columns.at((*it)));
         }
-        return returnString;
-    }
-    
-    void MakeHeaderUnique() {
-        header.columns.erase(unique(header.columns.begin(),header.columns.end()),header.columns.end());
-    }
-    
-    void Project(string a, string b) {
-        for(int i = 0; i < header.columns.size(); i++) {
-            if(header.columns[i] == a || header.columns[i] == b) {
-                //keep the header coulmn
-            } else {
-                //delete the column
-                header.columns.erase(header.columns.begin() + i);
-                for(set <Tuple>::iterator it = tuples.begin(); it != tuples.end(); it++) {
-                    Tuple tempT = *it;
-                    for(int j = 0; j < tempT.values.size(); j++) {
-                        if(j == i) {
-                            tempT.values.erase(tempT.values.begin() + i);
-                        }
-                    }
-                    tempT.PrintValues();
-                    tuples.erase(it);
-                    tuples.insert(tempT);
-                }
-            }
-        }
-    }
-    
-    void Rename(string a, string b, string c) {
-        nameOfRelation = c;
-        header.columns[0] = a;
-        header.columns[1] = b;
-    }
-    
-    
-    void PrintAllDetails(Rules* r) {
-        cout << "***************" << endl;
-        cout << nameOfRelation << endl;
-        cout << header.PrintColumns() << endl;
-        for(set <Tuple>::iterator it = tuples.begin(); it != tuples.end(); it++) {
-            Tuple tempT = *it;
-            for(int i = 0; i < 2; i++) {
-                if(i % 2 != 0) {
-                    cout << header.columns[i] << "=" << tempT.values[i];
+        
+        for (set<Tuple>::iterator it2 = this->tuples.begin(); it2 != this->tuples.end(); it2++) {
+            Tuple tuple = Tuple();
+            Tuple t = (*it2);
+            for(vector<unsigned int>::iterator it3 = pos.begin(); it3 != pos.end(); it3++) {
+                if((*it3) > (*it2).values.size() - 1) {
+                    //do nothing
                 } else {
-                    cout << header.columns[i] << "=" << tempT.values[i] << ", ";
+                string s = (*it2).values.at(*it3);
+                tuple.AddTuple(s);
                 }
-                
             }
-            cout << endl;
-            
-            //tempT.PrintValues();
+            newTuples.insert(tuple);
         }
-        cout << "***************" << endl;
+        
+        this->header.columns = newAttributes;
+        this->tuples = newTuples;
+        
         
     }
+    
+    /*
+     for(unsigned int i = 0; i < pos.size(); i++) {
+         string s = (*it2).values[i];
+         tuple.AddTuple(s);
+     }
+     */
+    
     
     void Union(Relation t) {
         for(set <Tuple>::iterator it = t.tuples.begin(); it != t.tuples.end(); it++) {
@@ -130,28 +106,37 @@ public:
     
     Header CombineHeader(Relation r1, Relation r2) {
         Header h;
+        bool matchFound = false;
         
-        for(int i = 0; i < r1.header.columns.size(); i++) {
+        for(unsigned int i = 0; i < r1.header.columns.size(); i++) {
             h.AddColumns(r1.header.columns[i]);
         }
-        for(int j = 0; j < r2.header.columns.size(); j++) {
-            for(int k = 0; k < r1.header.columns.size(); k++) {
+        for(unsigned int j = 0; j < r2.header.columns.size(); j++) {
+            matchFound = false;
+            for(unsigned int k = 0; k < r1.header.columns.size(); k++) {
                 if(r1.header.columns[k] == r2.header.columns[j]) {
-                    matching.insert(pair<int,int>(k,j));
+                    matching.insert(pair<unsigned int,unsigned int>(k,j));
+                    matchFound = true;
+                    break;
                 }
             }
-            h.AddColumns(r2.header.columns[j]);
+            if(!matchFound) {
+                h.AddColumns(r2.header.columns[j]);
+            }
+            
         }
         //header.columns.erase(unique(header.columns.begin(),header.columns.end()),header.columns.end());
         
         h.columns.erase(unique(h.columns.begin(), h.columns.end()), h.columns.end());
+        
+        
         
         return h;
     }
     
     void ChangeHeader(vector <Parameter*> s) {
         Header h;
-        for(int i = 0; i < s.size(); i++) {
+        for(unsigned int i = 0; i < s.size(); i++) {
             h.AddColumns(s[i]->GetParameter());
         }
         header = h;
@@ -160,7 +145,7 @@ public:
     bool IsJoinable(Tuple t1, Tuple t2) {
         bool joinable = true;
         
-        for(map<int,int>::iterator it = matching.begin(); it != matching.end(); it++) {
+        for(map<unsigned int,unsigned int>::iterator it = matching.begin(); it != matching.end(); it++) {
             if(t1.values[it->first] != t2.values[it->second]) {
                 joinable = false;
             }
@@ -171,14 +156,14 @@ public:
     Tuple CombineTuples(Tuple t1, Tuple t2) {
         Tuple tempTuple;
         
-        for(int i = 0; i < t1.values.size(); i++) {
+        for(unsigned int i = 0; i < t1.values.size(); i++) {
             tempTuple.AddTuple(t1.values[i]);
         }
         
         
-        for(int j = 0; j < t2.values.size(); j++) {
+        for(unsigned int j = 0; j < t2.values.size(); j++) {
             bool found = false;
-            for(map<int,int>::iterator it = matching.begin(); it != matching.end(); it++) {
+            for(map<unsigned int,unsigned int>::iterator it = matching.begin(); it != matching.end(); it++) {
                 if(it->second == j) {
                     found = true;
                     break;
@@ -192,7 +177,7 @@ public:
     }
     
     
-    map <int,int> matching;
+    map <unsigned int,unsigned int> matching;
     string nameOfRelation = "";
     Header header;
     set <Tuple> tuples;

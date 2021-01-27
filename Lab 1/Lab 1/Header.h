@@ -22,7 +22,7 @@ public:
     void AddColumns(string s);
     string PrintColumns() {
         string temp = "";
-        for(int i = 0; i < columns.size(); i++) {
+        for(unsigned int i = 0; i < columns.size(); i++) {
             temp += " " + columns[i] + "\t";
         }
         return temp;

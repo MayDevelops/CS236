@@ -17,7 +17,7 @@ public:
         buildS << "(";
         buildS << headPred->GetParameters();
         buildS << ") :- ";
-        for(int i = 0; i < body.size(); i++) {
+        for(unsigned int i = 0; i < body.size(); i++) {
             buildS << body[i]->GetID();
             buildS << "(";
             buildS << body[i]->GetParameters();

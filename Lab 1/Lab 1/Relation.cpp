@@ -52,7 +52,7 @@ void Relation::AddTuple(Tuple t) {
 
 
 
-Relation Relation::Select1(int index, string value){
+Relation Relation::Select1(unsigned int index, string value){
     Relation temp;
     temp.header = header;
     temp.nameOfRelation = nameOfRelation;
@@ -64,7 +64,7 @@ Relation Relation::Select1(int index, string value){
     return temp;
 }
 
-Relation Relation::Select2(int index1, int index2) {
+Relation Relation::Select2(unsigned int index1, unsigned int index2) {
     Relation temp;
     temp.header = header;
     temp.nameOfRelation = nameOfRelation;
@@ -78,7 +78,7 @@ Relation Relation::Select2(int index1, int index2) {
     
 }
 
-Relation Relation::Rename(int index, string value) {
+Relation Relation::Rename(unsigned int index, string value) {
     Relation temp;
     temp.header = header;
     temp.nameOfRelation = nameOfRelation;
@@ -96,7 +96,7 @@ Relation Relation::Project(vector <unsigned int> indexes) {
     Header tempH;
     for (unsigned int i = 0; i < header.columns.size(); i++) {
         for(unsigned int j = 0; j < indexes.size(); j++) {
-            if (indexes[j] == i) {
+            if (indexes[i] == j) {
                 tempH.AddColumns(header.columns[i]);
             }
         }
@@ -119,4 +119,3 @@ Relation Relation::Project(vector <unsigned int> indexes) {
     
     return temp;
 }
-

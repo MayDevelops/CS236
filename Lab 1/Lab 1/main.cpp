@@ -14,13 +14,13 @@ using namespace std;
 int main(int argc, const char * argv[]) {
     
 
-    vector <string> inFiles = {"input4.txt"};
+    vector <string> inFiles = {"input7.txt"};
     //"input0.txt","input1.txt", "input2.txt", "input3.txt", "input4.txt", "input5.txt", "input6.txt", "input7.txt", "input8.txt"
     
     
     
     
-#ifdef DEBUG
+#ifndef DEBUG
     Lexer lexer(argv[1]);
     DatalogProgram datalogProgram;
     Database database;
@@ -33,7 +33,7 @@ int main(int argc, const char * argv[]) {
 #endif
     
     
-#ifndef DEBUG
+#ifdef DEBUG
     for(int i = 0; i < inFiles.size(); i++) {
         Lexer lexer(inFiles[i]);
         DatalogProgram datalogProgram;
